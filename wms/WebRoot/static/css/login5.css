@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+body
+{
+	margin: 0px;
+	color: #333333;
+	font-size:12px;	
+}
+
+a, input, textarea, select, p, span, th, td {
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+}
+.hand{cursor:hand;}
+.note{font-size:12px;font-family:Arial, Helvetica, sans-serif;color:#990000}
+
+A:link{text-decoration:none;color:#333333;}
+A:visited{text-decoration:none;color:#333333;}
+A:hover{text-decoration:underline;color:#333333;}
+
+/*a:link {color: #FF0000}      */
+/*a:visited {color: #00FF00}   */
+/*a:hover {color: #FF00FF}     */
+/* a:active {color: #0000FF}   */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td { padding:0; margin:0; font-size:12px; line-height:100%; font-family:Arial, sans-serif;}
+
+ul, ol { list-style:none;}
+img { border:0;}
+
+
+
+
+/*login*/
+.login_warp{ width:960px; margin:0px auto;}
+.login_top{ /*border-top:#58a2ec 3px solid;*/
+	line-height:58px;
+	height:58px;
+	text-align:right;
+	padding-right:33px;
+	background-image: url(../images/login_poslogo.jpg);
+	background-repeat: no-repeat;
+	background-position: 30px;
+}
+.login_main{display:block; position:relative;}
+.login_bottom{ border-top:#cccccc solid 1px; text-align:center; line-height:86px; color: #999999; margin-top:50px; background:#f9fcfd}
+
+
+.login_top_right{font-weight:bold; }
+.login_top_right2{font-weight:bold; color:#CC0000; }
+.login_top_right3{ color:#555555; padding:0px 3px; display:none}
+
+
+
+.login_box { display:block; width:511px;  position:absolute; right:48px; color:#666666;}
+.login_box_main{/* border-left:#9dd4e8 1px solid;border-right:#9dd4e8 1px solid; */background:url(../images/login_box_posmain.jpg) no-repeat; height:479px; text-align:center}
+
+.login_box_main_ul{ width:291px; margin:0px auto; }
+
+.login_box_main_ul th{ text-align:left; font-weight:bold; width:85px; text-indent:1em; font-size:14px;}
+.login_box_main_ul td{ text-align:left; height:35px; line-height:35px;}
+.login_box_main_ul_td_input{ width:195px; height:24px; line-height:24px; font-size:12px; color:#666666;}
+
+
+
+.login_box_main{ text-align:center;}
+
+.login_box_main h2{ line-height:80px;}
+.login_box_main h3 img{ border-bottom: #dddddd 1px solid; padding-top:10px; margin-bottom:20px;}
+
+
+.login_banner_bg{ padding-top:18px;}
+
+.login_text{}
+.login_text h1{ line-height:3em; font-size:14px; font-weight: bold; padding-top:5px;}
+.login_text_table{}
+.login_text_table td{ padding:5px; line-height:1.5em; color:#999999;}
+
+.login_box_main_NO_top1{ width:350px; margin:0px auto; height:20px;}
+.login_box_main_NO_top2{ width:350px; margin:0px auto;border-top:#cccccc solid 1px; height:20px;}
+
+.login_box_main_NO{ width:369px; margin:0px auto;}
+.login_box_main_NO td{ height:67px; line-height:67px; text-align:center; width:33%}
+
+.login_box_main_NO td A{ font-size:30px; font-weight:bold; line-height:67px; background:url(../images/login_NO.bg11.jpg) no-repeat; display: block; width:123px; height:67px;}
+.login_box_main_NO td A:link{text-decoration:none;color:#333333;background:url(../images/login_NO.bg11.jpg) no-repeat; display: block; width:123px; height:67px;}
+.login_box_main_NO td A:visited{text-decoration:none;color:#333333;background:url(../images/login_NO.bg11.jpg) no-repeat; display: block; width:123px; height:67px;}
+.login_box_main_NO td A:hover{text-decoration:none;color:#cc0000;background:url(../images/login_NO.bg11.jpg) no-repeat; display: block; width:123px; height:67px;}
+.login_box_main_NO td A:active{text-decoration:none;color:#cc0000; background:url(../images/login_NO.bg12.jpg) no-repeat; text-indent:2px;}
+
+.login_box_main_NO_c A{font-size:24px; font-weight:bold;  width:123px; height:67px;line-height:67px;  background:url(../images/login_NO.bg21.jpg) no-repeat; display:block; }
+.login_box_main_NO_c A:link{text-decoration:none;color:#ffffff;background:url(../images/login_NO.bg21.jpg) no-repeat; display:block; }
+.login_box_main_NO_c A:visited{text-decoration:none;color:#ffffff;background:url(../images/login_NO.bg21.jpg) no-repeat; display:block; }
+.login_box_main_NO_c A:hover{text-decoration:none;color:#ffffff;background:url(../images/login_NO.bg21.jpg) no-repeat; display:block; }
+.login_box_main_NO_c A:active{text-decoration:none;color:#ffffff; background:url(../images/login_NO.bg22.jpg) no-repeat; text-indent:2px;}
+
+
+
+.login_box_main_NO_login A{ width:246px; height:67px;line-height:67px;  background:url(../images/login_NO.login.jpg) no-repeat; display:block;}
+.login_box_main_NO_login A:link{text-decoration:none;color:#333333; background:url(../images/login_NO.login.jpg) no-repeat; display:block;}
+.login_box_main_NO_login A:visited{text-decoration:none;color:#333333; background:url(../images/login_NO.login.jpg) no-repeat; display:block;}
+.login_box_main_NO_login A:hover{text-decoration:none;color:#cc0000; background:url(../images/login_NO.login.jpg) no-repeat; display:block;}
+.login_box_main_NO_login A:active{text-decoration:none;color:#cc0000; background:url(../images/login_NO.login2.jpg) no-repeat; text-indent:2px;}
+
+.login_box_main_NO_esc A{ width:123px; height:67px;line-height:67px;  background:url(../images/login_NO.esc.jpg) no-repeat; display:block; }
+.login_box_main_NO_esc A:link{text-decoration:none;color:#333333;background:url(../images/login_NO.esc.jpg) no-repeat; display:block; }
+.login_box_main_NO_esc A:visited{text-decoration:none;color:#333333;background:url(../images/login_NO.esc.jpg) no-repeat; display:block; }
+.login_box_main_NO_esc A:hover{text-decoration:none;color:#cc0000;background:url(../images/login_NO.esc.jpg) no-repeat; display:block; }
+.login_box_main_NO_esc A:active{text-decoration:none;color:#cc0000; background:url(../images/login_NO.esc2.jpg) no-repeat; text-indent:2px;}
+
+

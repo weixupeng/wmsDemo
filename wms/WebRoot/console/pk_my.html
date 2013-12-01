@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta  charset="UTF-8">
+<style>
+	table {margin:0px; padding:0px;}
+	table.tbfix {width:100%; table-layout:fixed; background:#bbb}
+	table.tbcom {width:100%; background:#bbb}
+	td {padding:3px; background:#fff}
+	td.title {background:#eee}
+	td.left {width:150px}
+	input.button {width:100px}
+	textarea#result {width:100%; height:300px; background:#ffffe0}
+</style>
+<script  type="text/javascript"  src="../static/js/jquery-1.4.4.js"></script>
+<script  type="text/javascript"  src="../static/js/jquery.cookie.js"></script>
+<script  type="text/javascript"  src="../static/api/app.util.js"></script>
+<script  type="text/javascript"  src="../static/api/apiTest.js"></script>
+</head>
+<body>
+	<h2>RuyiziService Debug Server - v1.0</h2>
+	<hr>
+<a  href="./home">Home</a>
+| <a  href="./apilist">Api Test</a>
+| <a  href="./apistat">Api Stat</a>
+<hr>
+<script type='text/javascript'>
+$(document).ready(function(){var header={};$('.doTest').click(function(){apiTest(header)});});
+</script>
+<input type='hidden' id='action' value='../api/pk/my'/>
+<input type='hidden' id='method' value='post'/>
+<table class='tbcom' cellpadding=1 cellspacing=1>
+<tr><td class='title' colspan=2>Api Test >我的盘口</td></tr>
+<tr><td class='left'>title</td><td>我的盘口</td></tr>
+<tr><td class='left'>url</td><td>/api/pk/my</td></tr>
+<tr><td>Test Data</td><td><table>
+  <tr><td>KEY : <input type='text' name='paramKey' value='pageNumber'/> VALUE : <input type='text' name='paramVal' style='width:200px' value='1'/> (INT 页码默认1) </td></tr> 
+  <tr><td>KEY : <input type='text' name='paramKey' value='key'/> VALUE : <input id="loginKey" type='text' name='paramVal' style='width:300px' value=''/> (STRING 登录密钥，已登录用户必填) </td></tr>
+</table></td></tr>
+<tr><td class='left'>method</td><td>post</td></tr>
+<tr><td class='left'>Test Submit</td><td><input type='button' class='doTest' value='提交测试'/></td></tr>
+<tr><td class='left'>Test Result</td><td><textarea id='result'></textarea></td></tr>
+</table>
+</body></html>

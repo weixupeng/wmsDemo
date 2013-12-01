@@ -1,0 +1,20 @@
+<div class="pageContent">
+	<form method="post" action="$!link.contextPath/sys/login!validateLogin.do" class="pageForm" onsubmit="return validateCallback(this, dialogLoginAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>帐号：</label>
+				<input type="text" name="userinfo.username" rightTarget="input[name='userinfo.pwd']" size="30" class="focus required {messages:{required:'请输入帐号！'}}"/>
+			</div>
+			<div class="unit">
+				<label>密码：</label>
+				<input type="password" name="userinfo.pwd" upTarget="input[name='userinfo.username']" onenter="return submitForm(obj,'form.pageForm');" size="30" class="required {messages:{required:'请输入密码！'}}"/>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">登录</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

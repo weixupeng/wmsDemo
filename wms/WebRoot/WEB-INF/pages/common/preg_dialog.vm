@@ -1,0 +1,40 @@
+<div class="pageContent">
+	<form method="post" action="$!link.contextPath/sys/preg.do" trytoUrl="$!link.contextPath/sys/ptryon.do" class="pageForm" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label style="width:115px;">产品序列号：</label>
+				<input type="text" name="serKey" rightTarget="input[name='customer']" size="30" class="focus required {maxlength:26,minlength:26}" title="请输入26位产品注册码！"/>
+			</div>
+			<div class="unit">
+				<label style="width:115px;">您的姓名/企业名称：</label>
+				<input type="text" name="customer" upTarget="input[name='serKey']" rightTarget="input[name='address']" size="30" class="required {messages:{required:'请输入您的姓名/企业名称！'}}"/>
+			</div>
+            <div class="unit">
+                <label style="width:115px;">您的地址：</label>
+                <input type="text" name="address" upTarget="input[name='customer']" rightTarget="input[name='telephone']" size="30" class="required {messages:{required:'请输入您的地址！'}}"/>
+            </div>
+            <div class="unit">
+                <label style="width:115px;">您的手机联系方式：</label>
+                <input id="telephone" type="text" name="telephone" upTarget="input[name='address']" rightTarget="input[name='activationCode']"  size="30" class="required {messages:{required:'请输入您的联系电话！'}}"/>
+				<!--
+                 <label style="width:115px;float:right"><div class="button"><div style="color:blue" class="buttonContent" onclick="migr.getActivationCode(this)">获取激活码</div></div></label>
+                -->
+            </div>
+            <!--
+                <div class="unit">
+    				<div id="activationCodeDiv" style="display:none">
+                        <label style="width:115px;">请输入激活码：</label>
+                        <input id="activationCode" type="text" name="activationCode" upTarget="input[name='telephone']" onenter="return submitForm(obj,'form.pageForm');" size="30" class="required {messages:{required:'请输入您的激活码！'}}"/>
+                    </div>
+                </div>
+            -->
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">注册</button></div></div></li>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="buuton" onclick="migr.ptryto(this)">试用</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,68 @@
+﻿@charset "utf-8";
+/*box*/
+.warp_box_ul{list-style:none;clear:both; margin:0px; border:0px; padding:0px;}
+.warp_box_ul li{ float:left; list-style:none; width:45px; height:50px; display:block; text-align:center; color:#eeeeee; font-size:14px; font-family:Arial, Helvetica, sans-serif; line-height:1em; font-weight:bold;}
+
+.warp_box_ul li A:link{font-size:12px;text-decoration:none;   text-align:center; color:#eeeeee; font-size:14px; font-family:Arial, Helvetica, sans-serif; line-height:50px; font-weight:bold;width:135px; height:50px; display:block;}
+.warp_box_ul li A:visited{font-size:12px;text-decoration:none; text-align:center; color:#eeeeee; font-size:14px; font-family:Arial, Helvetica, sans-serif; line-height:50px; font-weight:bold;width:135px; height:50px;display:block;}
+.warp_box_ul li A:hover{font-size:12px;text-decoration:none; text-align:center; color:#ffffff; font-size:14px; font-family:Arial, Helvetica, sans-serif; line-height:50px; font-weight:bold;width:135px; height:50px;display:block;}
+
+.warp_box_ul li.ico_main_bg_blue{ width:135px; height:50px; background:url(../images/ico/ico_main_bg_blue.jpg) no-repeat; line-height:50px;}
+.warp_box_ul li.ico_main_bg_green{ width:135px; height:50px; background:url(../images/ico/ico_main_bg_green.jpg) no-repeat; line-height:50px;}
+.warp_box_ul li.ico_main_bg_orange{ width:135px; height:50px; background:url(../images/ico/ico_main_bg_orange.jpg) no-repeat; line-height:50px;}
+.warp_box_ul li.ico_main_bg_gray{width:135px; height:50px; background:url(../images/ico/ico_main_bg_gray.jpg) no-repeat; line-height:50px;}
+
+.warp_box_ul li.ico_main_bg_gray a{cursor:default;}
+.warp_box_ul li.ico_main_bg_gray a:hover{color:#eeeeee;}
+
+.warp_box_ul li.ico_line_a1{background:url(../images/ico/ico_line_a1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a1_2{background:url(../images/ico/ico_line_a1_2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a1_3{background:url(../images/ico/ico_line_a1_3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a2{background:url(../images/ico/ico_line_a2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a2_2{background:url(../images/ico/ico_line_a2_2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a2_3{background:url(../images/ico/ico_line_a2_3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a3{background:url(../images/ico/ico_line_a3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a3_2{background:url(../images/ico/ico_line_a3_2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a3_3{background:url(../images/ico/ico_line_a3_3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a4{background:url(../images/ico/ico_line_a4.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a4_2{background:url(../images/ico/ico_line_a4_2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_a4_3{background:url(../images/ico/ico_line_a4_3.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_b1{background:url(../images/ico/ico_line_b1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_b1_1{background:url(../images/ico/ico_line_b1_1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_b1_2{background:url(../images/ico/ico_line_b1_2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_b2{background:url(../images/ico/ico_line_b2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_b2_1{background:url(../images/ico/ico_line_b2_1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_b2_2{background:url(../images/ico/ico_line_b2_2.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_c1{background:url(../images/ico/ico_line_c1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c2{background:url(../images/ico/ico_line_c2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c3{background:url(../images/ico/ico_line_c3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c4{background:url(../images/ico/ico_line_c4.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c5{background:url(../images/ico/ico_line_c5.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c6{background:url(../images/ico/ico_line_c6.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c7{background:url(../images/ico/ico_line_c7.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c8{background:url(../images/ico/ico_line_c8.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c9{background:url(../images/ico/ico_line_c9.jpg) no-repeat;}
+.warp_box_ul li.ico_line_c10{background:url(../images/ico/ico_line_c10.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_d1{background:url(../images/ico/ico_line_d1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_d2{background:url(../images/ico/ico_line_d2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_d3{background:url(../images/ico/ico_line_d3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_d4{background:url(../images/ico/ico_line_d4.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_e1{background:url(../images/ico/ico_line_e1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_e2{background:url(../images/ico/ico_line_e2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_e3{background:url(../images/ico/ico_line_e3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_e4{background:url(../images/ico/ico_line_e4.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_f1{background:url(../images/ico/ico_line_f1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_f2{background:url(../images/ico/ico_line_f2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_f3{background:url(../images/ico/ico_line_f3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_f4{background:url(../images/ico/ico_line_f4.jpg) no-repeat;}
+
+.warp_box_ul li.ico_line_g1{background:url(../images/ico/ico_line_g1.jpg) no-repeat;}
+.warp_box_ul li.ico_line_g2{background:url(../images/ico/ico_line_g2.jpg) no-repeat;}
+.warp_box_ul li.ico_line_g3{background:url(../images/ico/ico_line_g3.jpg) no-repeat;}
+.warp_box_ul li.ico_line_g4{background:url(../images/ico/ico_line_g4.jpg) no-repeat;}
+.warp_box_ul li.ico_line_g5{background:url(../images/ico/ico_line_g5.jpg) no-repeat;}
