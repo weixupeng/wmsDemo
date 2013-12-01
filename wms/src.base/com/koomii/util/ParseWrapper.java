@@ -1,4 +1,4 @@
-package com.migrsoft.util;
+package com.koomii.util;
 
 public class ParseWrapper {
 	public	static	int	parseInt( String s, int nDefault )

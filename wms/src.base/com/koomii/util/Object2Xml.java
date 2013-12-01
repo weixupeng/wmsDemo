@@ -1,4 +1,4 @@
-package com.migrsoft.util;
+package com.koomii.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -122,12 +122,12 @@ public class Object2Xml{
 		List  list=new ArrayList();
 		StringBuffer xml = new StringBuffer();
 		String head="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-		String[]subStringMigr=MigrStringUtil.substringsBetween(xmlstr,"<migr>","</migr>");
+		String[]subStringMigr=ChristStringUtil.substringsBetween(xmlstr,"<migr>","</migr>");
 		for(int i=0;i<subStringMigr.length;i++){
 			String child=subStringMigr[i];
 			child=child.trim();
-			if(MigrStringUtil.isNotEmpty(child)){
-				String typeName=MigrStringUtil.substringBetween(child, "<",">");
+			if(ChristStringUtil.isNotEmpty(child)){
+				String typeName=ChristStringUtil.substringBetween(child, "<",">");
 				Object tempObject;
 				try {
 					tempObject = Xml2Object(Class.forName(tempHashMap.get(typeName)),head+child);
@@ -256,7 +256,7 @@ public class Object2Xml{
 						}else if("class java.lang.Integer".equals(type.toString()) || "int".equals(type.toString())){
 							fieldValue = Integer.valueOf((String)fieldValue);
 						}else if("class java.util.Date".equals(type.toString())){
-							fieldValue = MigrDateUtils.toDate((String)fieldValue,MigrDateUtils.TIME_PATTERN);
+							fieldValue = ChristDateUtils.toDate((String)fieldValue,ChristDateUtils.TIME_PATTERN);
 						}
 						else if("class [B".equals(type.toString())){
 							fieldValue = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode((String)fieldValue);
@@ -396,7 +396,7 @@ public class Object2Xml{
 							}else if("class java.lang.Integer".equals(type.toString()) || "int".equals(type.toString())){
 								fieldValue = Integer.valueOf((String)fieldValue);
 							}else if("class java.util.Date".equals(type.toString())){
-								fieldValue = MigrDateUtils.toDate((String)fieldValue,MigrDateUtils.TIME_PATTERN);
+								fieldValue = ChristDateUtils.toDate((String)fieldValue,ChristDateUtils.TIME_PATTERN);
 							}
 							else if("class [B".equals(type.toString())){
 								fieldValue = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode((String)fieldValue);

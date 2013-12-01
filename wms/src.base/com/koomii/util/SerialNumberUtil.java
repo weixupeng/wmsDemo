@@ -1,4 +1,4 @@
-package com.migrsoft.util;
+package com.koomii.util;
 
 import java.util.UUID;
 

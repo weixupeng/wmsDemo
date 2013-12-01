@@ -1,4 +1,4 @@
-package com.migrsoft.util;
+package com.koomii.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
