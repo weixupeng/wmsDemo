@@ -2,12 +2,12 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="wms">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinal"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinalshiroplugin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.base"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.ryz"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.wms"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinal"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinalshiroplugin"/>
         <property name="java-output-path" value="/ruyiziapi/WebRoot/WEB-INFO/classes"/>
         <property name="context-root" value="wms"/>
     </wb-module>
