@@ -10,10 +10,50 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-02 09:35:47
+Date: 2013-12-02 15:14:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `ryz_account`
+-- ----------------------------
+DROP TABLE IF EXISTS `ryz_account`;
+CREATE TABLE `ryz_account` (
+  `id` varchar(32) NOT NULL COMMENT '用户Id',
+  `createDate` datetime NOT NULL COMMENT '注册时间',
+  `modifyDate` datetime NOT NULL COMMENT '最后修改时间',
+  `loginName` varchar(32) NOT NULL COMMENT '注册名_登陆名',
+  `loginPwd` varchar(32) NOT NULL COMMENT '登录密码',
+  `nickName` varchar(32) DEFAULT NULL COMMENT '昵称_显示名',
+  `picPath` varchar(256) DEFAULT NULL COMMENT '图片相对路径',
+  `sign` varchar(128) DEFAULT NULL COMMENT '个性签名',
+  `birthday` datetime DEFAULT NULL COMMENT '用户生日',
+  `sex` int(11) DEFAULT NULL COMMENT '用户性别',
+  `state` int(11) NOT NULL COMMENT '用户状态',
+  `mobile` varchar(32) DEFAULT NULL COMMENT '手机号',
+  `qq` varchar(64) DEFAULT NULL COMMENT '用户QQ',
+  `email` varchar(64) DEFAULT NULL COMMENT '用户邮箱',
+  `ruyibiAll` bigint(20) NOT NULL COMMENT '如意币总额',
+  `pkNum` bigint(20) NOT NULL COMMENT '用户开盘总数',
+  `ruyibiLocked` bigint(20) NOT NULL COMMENT '如意币冻结金额',
+  `ruyibi` bigint(20) NOT NULL COMMENT '如意币可用金额',
+  `loginKey` varchar(128) DEFAULT NULL COMMENT '登录密钥',
+  `loginDate` datetime DEFAULT NULL COMMENT '登录时间',
+  PRIMARY KEY (`id`),
+  KEY `INDEX_USERINFO_LOGINNAME` (`loginName`),
+  KEY `INDEX_USERINFO_MOBILE` (`mobile`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+-- ----------------------------
+-- Records of ryz_account
+-- ----------------------------
+INSERT INTO `ryz_account` VALUES ('1', '2013-10-31 15:07:36', '2013-10-31 15:07:39', 'debug', 'debug', null, null, null, null, null, '0', null, null, null, '920', '3', '0', '920', 'eyJ2IjoiMS4wIiwidXNlcm5hbWUiOiJkZWJ1ZyIsImxvZ2luRGF0ZSI6IjEzODU5NTA1NjQ0MjIiLCJjdCI6IjAifQ', '2013-12-02 10:16:04');
+INSERT INTO `ryz_account` VALUES ('1e048e0c27e7476586f4d2d405ac97e1', '2013-11-05 12:01:11', '2013-11-05 12:01:11', 'zmg', 'zmg', null, null, null, null, null, '0', '', null, null, '0', '0', '0', '0', null, null);
+INSERT INTO `ryz_account` VALUES ('48fe897ae83d4a5686ea0e9b8926e6e0', '2013-10-31 16:36:36', '2013-10-31 16:36:36', 'lzy', 'lzy', 'rererere', null, null, null, null, '0', null, null, null, '1080', '0', '0', '1080', null, null);
+INSERT INTO `ryz_account` VALUES ('5138cd79ec424bbab5256806a5634698', '2013-11-05 12:04:03', '2013-11-05 12:04:03', 'jl', 'jl', null, null, null, null, null, '0', '', null, null, '0', '0', '0', '0', null, null);
+INSERT INTO `ryz_account` VALUES ('c6a4b31489754623827165781c8e496b', '2013-11-05 11:54:12', '2013-11-05 11:54:12', 'yl', 'yl', null, null, null, null, null, '0', '15011111111', null, null, '0', '0', '0', '0', null, null);
+INSERT INTO `ryz_account` VALUES ('f664fc5b219040f7b3c9e062aa937840', '2013-11-05 11:53:37', '2013-11-05 11:53:37', 'zfc', 'zfc', null, null, null, null, null, '0', '15011111111', null, null, '0', '0', '0', '0', null, null);
 
 -- ----------------------------
 -- Table structure for `ryz_feedback`
@@ -92,46 +132,6 @@ INSERT INTO `ryz_ruyibi_flow` VALUES ('645ac565f80d4886b0e5ed537c9bb331', '2013-
 INSERT INTO `ryz_ruyibi_flow` VALUES ('87d8afd78fe94944a8314ca0a0013c75', '2013-11-05 15:58:56', '2013-11-05 15:58:56', '1', '1', null, '10', null, '1776a465d3504663adb67d6bfa406aab');
 INSERT INTO `ryz_ruyibi_flow` VALUES ('cba769d3896041619aef9d1c4a73251f', '2013-11-05 17:10:07', '2013-11-05 17:10:07', '1', '1', null, '10', null, '6415b9d09eb141b99227735e488473c2');
 INSERT INTO `ryz_ruyibi_flow` VALUES ('f63cbe45aea046769f6254d2079e1c1d', '2013-11-03 14:27:35', '2013-11-03 14:27:35', '1', null, '0', null, '100', '130cbd7aa5c541c98d3d410f1b649a8b');
-
--- ----------------------------
--- Table structure for `ryz_user_info`
--- ----------------------------
-DROP TABLE IF EXISTS `ryz_user_info`;
-CREATE TABLE `ryz_user_info` (
-  `id` varchar(32) NOT NULL COMMENT '用户Id',
-  `createDate` datetime NOT NULL COMMENT '注册时间',
-  `modifyDate` datetime NOT NULL COMMENT '最后修改时间',
-  `loginName` varchar(32) NOT NULL COMMENT '注册名_登陆名',
-  `loginPwd` varchar(32) NOT NULL COMMENT '登录密码',
-  `nickName` varchar(32) DEFAULT NULL COMMENT '昵称_显示名',
-  `picPath` varchar(256) DEFAULT NULL COMMENT '图片相对路径',
-  `sign` varchar(128) DEFAULT NULL COMMENT '个性签名',
-  `birthday` datetime DEFAULT NULL COMMENT '用户生日',
-  `sex` int(11) DEFAULT NULL COMMENT '用户性别',
-  `state` int(11) NOT NULL COMMENT '用户状态',
-  `mobile` varchar(32) DEFAULT NULL COMMENT '手机号',
-  `qq` varchar(64) DEFAULT NULL COMMENT '用户QQ',
-  `email` varchar(64) DEFAULT NULL COMMENT '用户邮箱',
-  `ruyibiAll` bigint(20) NOT NULL COMMENT '如意币总额',
-  `pkNum` bigint(20) NOT NULL COMMENT '用户开盘总数',
-  `ruyibiLocked` bigint(20) NOT NULL COMMENT '如意币冻结金额',
-  `ruyibi` bigint(20) NOT NULL COMMENT '如意币可用金额',
-  `loginKey` varchar(128) DEFAULT NULL COMMENT '登录密钥',
-  `loginDate` datetime DEFAULT NULL COMMENT '登录时间',
-  PRIMARY KEY (`id`),
-  KEY `INDEX_USERINFO_LOGINNAME` (`loginName`),
-  KEY `INDEX_USERINFO_MOBILE` (`mobile`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
-
--- ----------------------------
--- Records of ryz_user_info
--- ----------------------------
-INSERT INTO `ryz_user_info` VALUES ('1', '2013-10-31 15:07:36', '2013-10-31 15:07:39', 'debug', 'debug', null, null, null, null, null, '0', null, null, null, '920', '3', '0', '920', 'eyJ2IjoiMS4wIiwidXNlcm5hbWUiOiJkZWJ1ZyIsImxvZ2luRGF0ZSI6IjEzODQ2NzM3MTM0NDgiLCJjdCI6IjAifQ', '2013-11-17 15:35:13');
-INSERT INTO `ryz_user_info` VALUES ('1e048e0c27e7476586f4d2d405ac97e1', '2013-11-05 12:01:11', '2013-11-05 12:01:11', 'zmg', 'zmg', null, null, null, null, null, '0', '', null, null, '0', '0', '0', '0', null, null);
-INSERT INTO `ryz_user_info` VALUES ('48fe897ae83d4a5686ea0e9b8926e6e0', '2013-10-31 16:36:36', '2013-10-31 16:36:36', 'lzy', 'lzy', 'rererere', null, null, null, null, '0', null, null, null, '1080', '0', '0', '1080', null, null);
-INSERT INTO `ryz_user_info` VALUES ('5138cd79ec424bbab5256806a5634698', '2013-11-05 12:04:03', '2013-11-05 12:04:03', 'jl', 'jl', null, null, null, null, null, '0', '', null, null, '0', '0', '0', '0', null, null);
-INSERT INTO `ryz_user_info` VALUES ('c6a4b31489754623827165781c8e496b', '2013-11-05 11:54:12', '2013-11-05 11:54:12', 'yl', 'yl', null, null, null, null, null, '0', '15011111111', null, null, '0', '0', '0', '0', null, null);
-INSERT INTO `ryz_user_info` VALUES ('f664fc5b219040f7b3c9e062aa937840', '2013-11-05 11:53:37', '2013-11-05 11:53:37', 'zfc', 'zfc', null, null, null, null, null, '0', '15011111111', null, null, '0', '0', '0', '0', null, null);
 
 -- ----------------------------
 -- Table structure for `sys_moudle`
