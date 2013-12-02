@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>如意子API&后台管理系统</title>
+<title>仓库管理系统</title>
 <base href="${CONTEXT_PATH}/" />
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="static/themes/default/style.css" rel="stylesheet" type="text/css" />
@@ -212,7 +212,7 @@ $(function(){
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<span class="logo" href="#">如意子API&后台管理系统</span>
+				<span class="logo" href="#">仓库管理系统</span>
 				<ul class="nav">
                     <li><span>当前用户：<span id="loginName"><#if (loginUser.realname)! == "">${(loginUser.username)!}<#else>${(loginUser.realname)!}</#if></span> &nbsp&nbsp</span></li>
 					<li class="line"><a href="sys/userinfo!toUpdatePassword.do" target="dialog" rel="s_password_update" width="510" height="230" title="修改密码">修改密码</a></li>
@@ -264,6 +264,6 @@ $(function(){
 
 	</div>
 
-	<div id="footer">Copyright &copy; 2012  © 版权所有 </div>
+	<div id="footer">Copyright &copy; 2013  © 版权所有 </div>
 </body>
 </html>
