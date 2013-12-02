@@ -215,7 +215,7 @@ $(function(){
 				<span class="logo" href="#">仓库管理系统</span>
 				<ul class="nav">
                     <li><span>当前用户：<span id="loginName"><#if (loginUser.realname)! == "">${(loginUser.username)!}<#else>${(loginUser.realname)!}</#if></span> &nbsp&nbsp</span></li>
-					<li class="line"><a href="sys/userinfo!toUpdatePassword.do" target="dialog" rel="s_password_update" width="510" height="230" title="修改密码">修改密码</a></li>
+					<li class="line"><a href="toUpdatePassword" target="dialog" rel="s_password_update" width="510" height="230" title="修改密码">修改密码</a></li>
 					<li class="line"><a href="logout">退出</a></li>
 					<li class="line" style="margin-right:60px"></li>
 				</ul>

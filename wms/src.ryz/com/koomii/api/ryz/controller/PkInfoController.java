@@ -10,7 +10,7 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.koomii.api.base.BaseAPIController;
-import com.koomii.api.common.ModelConfig;
+import com.koomii.api.common.ModelConfigRyz;
 import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
 import com.koomii.api.ryz.model.Account;
@@ -33,7 +33,7 @@ public class PkInfoController extends BaseAPIController {
 		
 		Page<PkInfo> pager = PkInfo.dao.paginate(pageNumber, Constant.pageSize,
 				"select * ",
-				" from " + ModelConfig.TABLE_PKInfo +" order by pv desc");
+				" from " + ModelConfigRyz.TABLE_PKInfo +" order by pv desc");
 		
 		Map<String, Object> result = new HashMap<String,Object>();
 		result.put(RESULT_CDOE_PKInfoHotPage, pager);
@@ -52,7 +52,7 @@ public class PkInfoController extends BaseAPIController {
 		
 		Page<PkInfo> pager = PkInfo.dao.paginate(pageNumber, Constant.pageSize,
 				"select * ",
-				" from " + ModelConfig.TABLE_PKInfo +" order by createDate desc");
+				" from " + ModelConfigRyz.TABLE_PKInfo +" order by createDate desc");
 		
 		Map<String, Object> result = new HashMap<String,Object>();
 		result.put(RESULT_CDOE_PKInfoLastestPage, pager);
@@ -100,7 +100,7 @@ public class PkInfoController extends BaseAPIController {
 		ruyibiLocked += pkRuyibi;
 		
 		//变更盘口总数
-		long pkNum = Db.queryLong("select count(*) from "+ModelConfig.TABLE_PKInfo+" where pubUserId=?",user.getStr("id"));
+		long pkNum = Db.queryLong("select count(*) from "+ModelConfigRyz.TABLE_PKInfo+" where pubUserId=?",user.getStr("id"));
 		user.set("pkNum",pkNum).
 			 set("ruyibi",accountRuyibi).
 			 set("ruyibiLocked",ruyibiLocked).
@@ -209,7 +209,7 @@ public class PkInfoController extends BaseAPIController {
 		
 		Page<PkInfo> pager = PkInfo.dao.paginate(pageNumber, Constant.pageSize,
 				"select * ",
-				" from " + ModelConfig.TABLE_PKInfo +" where pubUserId=? order by createDate desc",
+				" from " + ModelConfigRyz.TABLE_PKInfo +" where pubUserId=? order by createDate desc",
 				user.getStr("id"));
 		
 		Map<String, Object> result = new HashMap<String,Object>();
@@ -236,7 +236,7 @@ public class PkInfoController extends BaseAPIController {
 		
 		Page<PkInfo> pager = PkInfo.dao.paginate(pageNumber, Constant.pageSize,
 				"select * ",
-				" from " + ModelConfig.TABLE_PKInfo +" where recUserId=? order by createDate desc",
+				" from " + ModelConfigRyz.TABLE_PKInfo +" where recUserId=? order by createDate desc",
 				user.getStr("id"));
 		
 		Map<String, Object> result = new HashMap<String,Object>();

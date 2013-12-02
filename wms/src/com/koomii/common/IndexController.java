@@ -9,12 +9,14 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import com.alibaba.fastjson.JSONObject;
 import com.koomii.base.BaseController;
-import com.koomii.sys.model.AdminInfo;
+import com.koomii.sys.model.Userinfo;
+import com.koomii.util.ChristStringUtil;
 
 public class IndexController extends BaseController {
 	
@@ -38,7 +40,7 @@ public class IndexController extends BaseController {
 	}
 	
 	public void validateLogin(){
-		AdminInfo user = getModel(AdminInfo.class,"userinfo");
+		Userinfo user = getModel(Userinfo.class,"userinfo");
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getStr("username"), user.getStr("pwd"));
 		try {
 			Subject subject = SecurityUtils.getSubject();
@@ -48,7 +50,7 @@ public class IndexController extends BaseController {
 			// 这里可以调用subject 做判断
 			String username = (String)subject.getPrincipal();
 			Session session = subject.getSession(true);
-			AdminInfo loginUser = AdminInfo.dao.findFirst("select * from sys_userinfo where username=?",username);
+			Userinfo loginUser = Userinfo.dao.findFirst("select * from sys_userinfo where username=?",username);
 			session.setAttribute("loginUser", loginUser);
 			JSONObject json = new JSONObject();
 			json.put("statusCode", "200");
@@ -73,8 +75,26 @@ public class IndexController extends BaseController {
 		} 
 	}
 	
+	//跳转修改密码页面
+	public void toUpdatePassword(){
+		render("common/updatePassword.html");
+	}
+	//修改密码
+	public void updatePassword(){
+		Subject subject = SecurityUtils.getSubject();
+		String username = (String)subject.getPrincipal();
+		Userinfo loginUser = Userinfo.dao.findFirst("select * from sys_userinfo where username=?",username);
+		String newPwd = getPara("newPassword");
+		String md5NewPwd = ChristStringUtil.md5(newPwd);
+		if(loginUser.get("pwd").equals(md5NewPwd)){
+			loginUser.set("pwd", md5NewPwd).update();
+			renderDWZSuccessJson("密码修改成功，新密码已生效！");
+		}else{
+			renderDWZErrorJson("您输入的旧密码错误！");
+		}
+	}
+	
 	public void main(){
-		
 		render("common/main.html");
 	}
 	public void sidebar(){

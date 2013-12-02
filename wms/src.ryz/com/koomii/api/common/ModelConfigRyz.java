@@ -7,7 +7,8 @@ import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
 import com.koomii.api.ryz.model.Account;
 
-public class ModelConfig {
+public class ModelConfigRyz {
+	
 	public static final String TABLE_Account = "ryz_account";
 	public static final String TABLE_PKInfo = "ryz_pankou_info";
 	public static final String TABLE_Flow = "ryz_ruyibi_flow";

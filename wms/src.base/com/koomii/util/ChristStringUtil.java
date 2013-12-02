@@ -13,8 +13,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class ChristStringUtil extends StringUtils {
 	protected static final String m_strEncrypt = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	protected	static	final	String	CRYPT_DEFAULT	=	"MD5";
-	protected	static	String	m_strMethod	=	CRYPT_DEFAULT;
+	protected	static	final	String	CRYPT_DEFAULT = "MD5";
     
     /** 空字符串。 */
     public static final String EMPTY_STRING = "";

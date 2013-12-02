@@ -6,7 +6,8 @@ import com.koomii.api.ryz.controller.ConsoleController;
 import com.koomii.api.ryz.controller.PkInfoController;
 import com.koomii.api.ryz.controller.UserInfoController;
 
-public class RouteConfig {
+public class RouteConfigRyz {
+	
 	public static void config(Routes me){
 		me.add("/api/u", UserInfoController.class);
 		me.add("/api/pk", PkInfoController.class);

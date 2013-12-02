@@ -18,9 +18,9 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.render.ViewType;
-import com.koomii.api.common.ModelConfig;
-import com.koomii.api.common.RouteConfig;
-import com.koomii.sys.model.AdminInfo;
+import com.koomii.api.common.ModelConfigRyz;
+import com.koomii.api.common.RouteConfigRyz;
+import com.koomii.sys.model.Userinfo;
 
 /**
  * API引导式配置
@@ -55,7 +55,8 @@ public class JFinalWebConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		this.routes = me;
 		me.add("/", IndexController.class);
-		RouteConfig.config(me);
+		me.add("/userinfo", IndexController.class);
+		RouteConfigRyz.config(me);
 	}
 	
 	/**
@@ -81,9 +82,9 @@ public class JFinalWebConfig extends JFinalConfig {
 //		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 		me.add(arp);
-		arp.addMapping("sys_userinfo",AdminInfo.class);
+		arp.addMapping("sys_userinfo",Userinfo.class);
 		//配置models
-		ModelConfig.config(arp);
+		ModelConfigRyz.config(arp);
 		//配置shiro插件
 		me.add(new ShiroPlugin(this.routes));
 	}

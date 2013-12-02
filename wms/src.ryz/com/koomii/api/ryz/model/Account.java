@@ -1,7 +1,7 @@
 package com.koomii.api.ryz.model;
 
 import com.jfinal.plugin.activerecord.Model;
-import com.koomii.api.common.ModelConfig;
+import com.koomii.api.common.ModelConfigRyz;
 
 public class Account extends Model<Account> {
 	private static final long serialVersionUID = 6232171820443147930L;
@@ -14,7 +14,7 @@ public class Account extends Model<Account> {
 	 * @return
 	 */
 	public Account getUserByLoginName(String loginName){
-		return Account.dao.findFirst("select * from "+ModelConfig.TABLE_Account+
+		return Account.dao.findFirst("select * from "+ModelConfigRyz.TABLE_Account+
 				" where loginName=?",
 				loginName);
 		
@@ -26,7 +26,7 @@ public class Account extends Model<Account> {
 	 * @return
 	 */
 	public Account getUserByKey(String loginKey){
-		return Account.dao.findFirst("select * from "+ModelConfig.TABLE_Account+
+		return Account.dao.findFirst("select * from "+ModelConfigRyz.TABLE_Account+
 				" where loginKey=?",
 				loginKey);
 		
