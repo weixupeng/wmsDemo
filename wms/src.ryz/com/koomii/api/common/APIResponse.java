@@ -1,4 +1,4 @@
-package com.koomii.api;
+package com.koomii.api.common;
 
 public class APIResponse {
 	/**

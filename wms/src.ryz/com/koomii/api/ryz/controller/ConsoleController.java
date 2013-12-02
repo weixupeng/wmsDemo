@@ -1,7 +1,7 @@
 package com.koomii.api.ryz.controller;
 
 
-import com.koomii.api.BaseAPIController;
+import com.koomii.api.base.BaseAPIController;
 
 public class ConsoleController extends BaseAPIController {
 	

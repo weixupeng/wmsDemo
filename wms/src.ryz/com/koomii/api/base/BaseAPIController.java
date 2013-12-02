@@ -1,4 +1,4 @@
-package com.koomii.api;
+package com.koomii.api.base;
 
 import java.util.HashMap;
 import java.util.Map;

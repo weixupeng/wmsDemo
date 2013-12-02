@@ -1,4 +1,4 @@
-package com.koomii.common;
+package com.koomii.api.common;
 
 import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;

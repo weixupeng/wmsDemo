@@ -1,6 +1,6 @@
 package com.koomii.api.ryz.controller;
 
-import static com.koomii.api.APIResponse.*;
+import static com.koomii.api.common.APIResponse.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,14 +9,14 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.koomii.api.BaseAPIController;
+import com.koomii.api.base.BaseAPIController;
+import com.koomii.api.common.ModelConfig;
 import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
 import com.koomii.api.ryz.model.UserInfo;
 import com.koomii.api.ryz.validator.IdValidator;
 import com.koomii.api.ryz.validator.PkJudgeValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
-import com.koomii.common.ModelConfig;
 import com.koomii.common.Constant;
 import com.koomii.util.ChristDateUtils;
 import com.koomii.util.ModelUtils;

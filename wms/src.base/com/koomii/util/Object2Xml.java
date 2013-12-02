@@ -15,6 +15,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
@@ -259,7 +260,7 @@ public class Object2Xml{
 							fieldValue = ChristDateUtils.toDate((String)fieldValue,ChristDateUtils.TIME_PATTERN);
 						}
 						else if("class [B".equals(type.toString())){
-							fieldValue = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode((String)fieldValue);
+							fieldValue = Base64.decodeBase64((String)fieldValue);
 						}
 						System.out.println(method.getName()+"=========="+fieldValue);
 						method.invoke(obj,fieldValue);
@@ -310,7 +311,7 @@ public class Object2Xml{
 						if(fieldValue instanceof byte[]){
 							byte[] v = (byte []) fieldValue;
 							String value = null;
-							value = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.encode(v);
+							value = Base64.encodeBase64String(v);
 							fieldValue = value;
 						}//end if
 						xml.append("\t\t<").append(fieldName).append(">")
@@ -399,7 +400,7 @@ public class Object2Xml{
 								fieldValue = ChristDateUtils.toDate((String)fieldValue,ChristDateUtils.TIME_PATTERN);
 							}
 							else if("class [B".equals(type.toString())){
-								fieldValue = com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode((String)fieldValue);
+								fieldValue = Base64.decodeBase64((String)fieldValue);
 							}
 							method.invoke(obj,fieldValue);
 						}

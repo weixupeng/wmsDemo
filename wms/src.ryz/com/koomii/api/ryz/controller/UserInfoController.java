@@ -1,6 +1,6 @@
 package com.koomii.api.ryz.controller;
 
-import static com.koomii.api.APIResponse.*;
+import static com.koomii.api.common.APIResponse.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import com.alibaba.druid.util.Base64;
 import com.jfinal.aop.Before;
 import com.jfinal.core.JFinal;
 import com.jfinal.upload.UploadFile;
-import com.koomii.api.BaseAPIController;
+import com.koomii.api.base.BaseAPIController;
 import com.koomii.api.ryz.model.UserInfo;
 import com.koomii.api.ryz.validator.PassowrdValidator;
 import com.koomii.api.ryz.validator.UserEditValidator;

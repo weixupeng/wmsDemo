@@ -1,7 +1,7 @@
 package com.koomii.api.ryz.model;
 
 import com.jfinal.plugin.activerecord.Model;
-import com.koomii.common.ModelConfig;
+import com.koomii.api.common.ModelConfig;
 
 public class UserInfo extends Model<UserInfo> {
 	private static final long serialVersionUID = 6232171820443147930L;

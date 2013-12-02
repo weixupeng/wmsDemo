@@ -1,6 +1,6 @@
 package com.koomii.api.ryz.validator;
 
-import static com.koomii.api.APIResponse.*;
+import static com.koomii.api.common.APIResponse.*;
 
 import com.jfinal.core.Controller;
 import com.koomii.base.BaseValidator;

@@ -18,6 +18,8 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.render.ViewType;
+import com.koomii.api.common.ModelConfig;
+import com.koomii.api.common.RouteConfig;
 import com.koomii.sys.model.AdminInfo;
 
 /**

@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 public class ChristStringUtil extends StringUtils {
 	protected static final String m_strEncrypt = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -174,45 +173,6 @@ public class ChristStringUtil extends StringUtils {
 		}
 	}
 
-	public static String encrypt( String __strPasswd, String __strName )
-	{
-		if( !CRYPT_DEFAULT.equals( m_strMethod ) )
-			return	digestString( __strPasswd, m_strMethod );
-		try
-		{
-			MessageDigest md = MessageDigest.getInstance( m_strMethod );
-			md.update( __strName.getBytes() ) ;
-			md.update( __strPasswd.getBytes() ) ;
-			byte[] result = md.digest() ;
-			return toHex( result );
-		}
-		catch( Exception ex )
-		{
-			ex.printStackTrace();
-		}
-		return	__strPasswd;
-	}
-	
-	public static String digestString(String pass, String algorithm )
-    {
-    	MessageDigest md;
-        ByteArrayOutputStream bos;
-        try
-        {
-            md = MessageDigest.getInstance(algorithm);
-            byte[] digest = md.digest(pass.getBytes("iso-8859-1"));
-            bos = new ByteArrayOutputStream();
-            OutputStream encodedStream = MimeUtility.encode(bos, "base64");
-            encodedStream.write(digest);
-            return bos.toString("iso-8859-1");
-        }
-        catch ( Exception ioe)
-        {
-            ioe.printStackTrace();
-        }
-        return	pass;
-    }
-	
 	/**
 	 * 得到字符串的实际长度,包括空格什么的
 	 * @author fg
