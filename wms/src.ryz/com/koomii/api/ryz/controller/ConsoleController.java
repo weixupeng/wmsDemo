@@ -1,11 +1,9 @@
 package com.koomii.api.ryz.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 
-import com.koomii.base.BaseController;
+import com.koomii.api.BaseAPIController;
 
-public class ConsoleController extends BaseController {
+public class ConsoleController extends BaseAPIController {
 	
 	public void index(){
 		setAttr("visitIp",getRequest().getRemoteHost());

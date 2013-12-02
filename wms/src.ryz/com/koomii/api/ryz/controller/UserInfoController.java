@@ -9,28 +9,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 
 
 import com.alibaba.druid.util.Base64;
 import com.jfinal.aop.Before;
 import com.jfinal.core.JFinal;
 import com.jfinal.upload.UploadFile;
+import com.koomii.api.BaseAPIController;
 import com.koomii.api.ryz.model.UserInfo;
 import com.koomii.api.ryz.validator.PassowrdValidator;
 import com.koomii.api.ryz.validator.UserEditValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
 import com.koomii.api.ryz.validator.UsernamePassowrdValidator;
-import com.koomii.base.BaseController;
-import com.koomii.common.ModelConfig;
 import com.koomii.common.Constant;
 import com.koomii.util.ChristDateUtils;
 import com.koomii.util.ChristStringUtil;
 import com.koomii.util.CommonUtil;
 import com.koomii.util.ModelUtils;
 
-public class UserInfoController extends BaseController {
+public class UserInfoController extends BaseAPIController {
 	
 	/**
 	 * 用户登录

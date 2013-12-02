@@ -8,6 +8,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.wms"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinalshiroplugin"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.jfinal_1.5"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="java-output-path" value="/ruyiziapi/WebRoot/WEB-INFO/classes"/>
         <property name="context-root" value="wms"/>
     </wb-module>

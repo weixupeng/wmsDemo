@@ -9,19 +9,19 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.koomii.api.BaseAPIController;
 import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
 import com.koomii.api.ryz.model.UserInfo;
 import com.koomii.api.ryz.validator.IdValidator;
 import com.koomii.api.ryz.validator.PkJudgeValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
-import com.koomii.base.BaseController;
 import com.koomii.common.ModelConfig;
 import com.koomii.common.Constant;
 import com.koomii.util.ChristDateUtils;
 import com.koomii.util.ModelUtils;
 
-public class PkInfoController extends BaseController {
+public class PkInfoController extends BaseAPIController {
 	/**
 	 * 最热PK列表
 	 */
