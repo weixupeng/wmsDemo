@@ -17,8 +17,6 @@ public abstract class BaseValidator extends Validator {
 		jsonMap.put("message",message);
 		jsonMap.put("result", result);
 		
-		//JsonKit被lzy改造了
-		JsonKit.customerDateFormart = "yyyy-MM-dd HH:mm:ss";
 		String jsonStr = JsonKit.toJson(jsonMap);
 		
 		c.renderJson(jsonStr);
