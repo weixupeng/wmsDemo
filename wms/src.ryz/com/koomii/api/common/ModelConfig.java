@@ -5,16 +5,16 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.koomii.api.ryz.model.Feedback;
 import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
-import com.koomii.api.ryz.model.UserInfo;
+import com.koomii.api.ryz.model.Account;
 
 public class ModelConfig {
-	public static final String TABLE_UserInfo = "ryz_user_info";
+	public static final String TABLE_Account = "ryz_account";
 	public static final String TABLE_PKInfo = "ryz_pankou_info";
 	public static final String TABLE_Flow = "ryz_ruyibi_flow";
 	public static final String TABLE_Feedback = "ryz_feedback";
 	
 	public static void config(ActiveRecordPlugin arp){
-		arp.addMapping(TABLE_UserInfo,UserInfo.class);
+		arp.addMapping(TABLE_Account,Account.class);
 		arp.addMapping(TABLE_PKInfo,PkInfo.class);
 		arp.addMapping(TABLE_Flow,RuyibiFlow.class);
 		arp.addMapping(TABLE_Feedback,Feedback.class);

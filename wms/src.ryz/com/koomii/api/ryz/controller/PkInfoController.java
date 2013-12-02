@@ -13,7 +13,7 @@ import com.koomii.api.base.BaseAPIController;
 import com.koomii.api.common.ModelConfig;
 import com.koomii.api.ryz.model.PkInfo;
 import com.koomii.api.ryz.model.RuyibiFlow;
-import com.koomii.api.ryz.model.UserInfo;
+import com.koomii.api.ryz.model.Account;
 import com.koomii.api.ryz.validator.IdValidator;
 import com.koomii.api.ryz.validator.PkJudgeValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
@@ -66,7 +66,7 @@ public class PkInfoController extends BaseAPIController {
 	public void add(){
 		String key = getPara("key");//登录密钥，已登录用户必须传递，以便分析
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -142,7 +142,7 @@ public class PkInfoController extends BaseAPIController {
 		String key = getPara("key");//登录密钥
 		
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -200,7 +200,7 @@ public class PkInfoController extends BaseAPIController {
 		String key = getPara("key");//登录密钥
 		
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -227,7 +227,7 @@ public class PkInfoController extends BaseAPIController {
 		String key = getPara("key");//登录密钥
 		
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -251,7 +251,7 @@ public class PkInfoController extends BaseAPIController {
 		String key = getPara("key");//登录密钥
 		
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -325,7 +325,7 @@ public class PkInfoController extends BaseAPIController {
 		}
 		//变更参与者的账户和流水
 		{
-			UserInfo recUser = user.findById(pkInfo.get("recUserId"));
+			Account recUser = user.findById(pkInfo.get("recUserId"));
 			long ruyibiAll = recUser.getLong("ruyibiAll");
 			long ruyibiLocked = recUser.getLong("ruyibiLocked");
 			long ruyibi = recUser.getLong("ruyibi");

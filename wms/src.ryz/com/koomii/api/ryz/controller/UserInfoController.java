@@ -16,7 +16,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.JFinal;
 import com.jfinal.upload.UploadFile;
 import com.koomii.api.base.BaseAPIController;
-import com.koomii.api.ryz.model.UserInfo;
+import com.koomii.api.ryz.model.Account;
 import com.koomii.api.ryz.validator.PassowrdValidator;
 import com.koomii.api.ryz.validator.UserEditValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
@@ -39,7 +39,7 @@ public class UserInfoController extends BaseAPIController {
 		String clientType = getPara("ct");//客户端类型 1-Android 2-Apple 3-WindowsPhone
 		String version = getPara("v");//客户端版本
 		//查询用户
-		UserInfo user = UserInfo.dao.getUserByLoginName(username);
+		Account user = Account.dao.getUserByLoginName(username);
 		if(user == null || !user.getStr("loginPwd").equals(password)){
 			toAPIResponse(RESPONSE_CODE_ERROR_LoginFail, "login fail,acount or password is wrong", null);
 			return;
@@ -77,7 +77,7 @@ public class UserInfoController extends BaseAPIController {
 	public void logout(){
 		String key = getPara("key");
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//删除key和登录时间
 		if(user != null)
 			user.set("loginKey", null).set("loginDate", null).update();
@@ -97,12 +97,12 @@ public class UserInfoController extends BaseAPIController {
 		String clientType = getPara("ct");//客户端类型 1-Android 2-Apple 3-WindowsPhone
 		String version = getPara("v");//客户端版本
 		//判定是否已经存在
-		if(null != UserInfo.dao.getUserByLoginName(username)){
+		if(null != Account.dao.getUserByLoginName(username)){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountExist, "account is exist", null);
 			return;
 		}
 		//注册信息
-		UserInfo user = new UserInfo();
+		Account user = new Account();
 		user.set("loginName", username).set("loginPwd", password).set("mobile", mobile);
 		ModelUtils.fillForSave(user);
 		user.set("state", 0).set("ruyibiAll", 0).set("ruyibiLocked", 0).set("ruyibi", 0).set("pkNum", 0);
@@ -121,7 +121,7 @@ public class UserInfoController extends BaseAPIController {
 	public void my(){
 		String key = getPara("key");
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
@@ -140,14 +140,14 @@ public class UserInfoController extends BaseAPIController {
 	public void edit(){
 		String key = getPara("key");
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
 			return;
 		}
 		//更新
-		UserInfo um = getModel(UserInfo.class);
+		Account um = getModel(Account.class);
 		user.set("nickName", um.getStr("nickName"))
 			.set("sign", um.getStr("sign"))
 			.set("birthday", um.getTimestamp("birthday"))
@@ -170,7 +170,7 @@ public class UserInfoController extends BaseAPIController {
 		String key = getPara("key");
 		String password = getPara("password");
 		//根据Key查询用户
-		UserInfo user = UserInfo.dao.getUserByKey(key);
+		Account user = Account.dao.getUserByKey(key);
 		//不存在则返回错误
 		if(user == null){
 			toAPIResponse(RESPONSE_CODE_ERROR_AccountNotExist, "account not exist or not login", null);
