@@ -22,30 +22,34 @@ public class BaseController extends Controller {
 	 * @param navTabId
 	 * @return
 	 */
-	public void toDwzJson(Integer statusCode,String message,String navTabId){
+	public void toDwzJson(Integer statusCode,String message,String navTabId,boolean close){
 		Map<String,Object> jsonMap=new HashMap<String,Object>();
 		jsonMap.put("statusCode", statusCode);
 		if(message!=null)
 		jsonMap.put("message",message);
 		if(navTabId!=null)
 			jsonMap.put("navTabId", navTabId);
+		if(close)
+			jsonMap.put("callbackType","closeCurrent");
 		this.renderJson(gson.toJson(jsonMap));
 	}
-	
+	public void renderDWZSuccessJson(String message,String navTabId,boolean close){
+		toDwzJson(200, message, navTabId,close);
+	}
 	public void renderDWZSuccessJson(String message,String navTabId){
-		toDwzJson(200, message, navTabId);
+		toDwzJson(200, message, navTabId,false);
 	}
 	
 	public void renderDWZSuccessJson(String message){
-		toDwzJson(200, message, null);
+		toDwzJson(200, message, null,false);
 	}
 	
 	public void renderDWZErrorJson(String message,String navTabId){
-		toDwzJson(300, message, navTabId);
+		toDwzJson(300, message, navTabId,false);
 	}
 	
 	public void renderDWZErrorJson(String message){
-		toDwzJson(300, message, null);
+		toDwzJson(300, message, null,false);
 	}
 	
 }

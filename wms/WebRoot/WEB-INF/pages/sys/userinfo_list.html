@@ -1,0 +1,93 @@
+<base href="${CONTEXT_PATH}/" />
+<form id="pagerForm" action="sys/userinfo" onsubmit="return navTabSearch(this)" method="post">
+   	<input type="hidden" name="pager.pageNumber" value="${(pager.pageNumber)!}" /><!--【必须】value=1可以写死-->
+   	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
+	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
+   		也可以在searchForm上设置属性rel=”pagerForm”，js框架会自动把searchForm搜索条件复制到pagerForm中 -->
+	<div class="pageHeader">
+		<div class="searchBar">
+    		<table class="searchContent">
+    			<tr>
+    				<td>
+    					请输入：<input type="text" class="focus highlightText" size="40" name="tag" value="${(tag)!}" alt="用户名、真实名称"/>
+    				</td>
+					
+    				<td><div class="button"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
+    			</tr>
+    		</table>
+    	</div>
+	</div>
+</form>
+<div class="pageContent" style="padding:0px">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" target="dialog"  width="580" height="400"  href="sys/userinfo/add"><span>新增</span></a></li>
+			<li class="line">line</li>
+			<li><a class="edit" href="sys/userinfo/edit?id={sid_obj}" width="580" height="400" target="dialog"><span>修改</span></a></li>
+			<li class="line">line</li>
+			<li><a class="delete" href="sys/userinfo/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
+			<li class="line">line</li>
+			<li><a class="edit" href="sys/userinfo/toUpdatePassword?id={sid_obj}" rel="userPassword_edit" width="500" height="300" target="dialog"><span>设置密码</span></a></li>
+		</ul>
+	</div>
+	
+	<table class="table" layoutH="112">
+		<thead>
+			<tr>
+				<th width="50" align="left"><input name="ids" type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
+				<th width="80" align="left">用户名</th>
+				<th width="80" align="left">真实姓名</th>
+				<th width="80" align="center">帐号状态</th>
+				<th width="90" align="left">手机号</th>
+				<th width="140" align="left">Email</th>
+				<th width="100" align="left">QQ</th>
+				<th width="120" align="left">电话</th>
+				<th width="80" align="center">系统内置</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pager.list as userinfo>
+				<tr target="sid_obj" rel="${userinfo.id!}" ondblclick="migr.baseMoudleDblick(this)"> 
+					<td align="left">
+						<input name="ids" type="checkbox" value="${userinfo.id!}"/>
+						${userinfo_index + 1}
+					</td>
+	            	<td align="left">${userinfo.username!}</td>
+	            	<td align="left">${userinfo.realname!}</td>
+	            	<td align="center">
+	            		<#if userinfo.inuse == 0>
+	            			正常
+	            		<#else>
+	            			已停用
+	            		</#if>
+	            	</td>
+	            	<td align="left">${userinfo.mobile!}</td>
+	            	<td align="left">${userinfo.email!}</td>
+	            	<td align="left">${userinfo.qq!}</td>
+	            	<td align="left">${userinfo.tel!}</td>
+	            	<td align="center">
+	            		<#if userinfo.isSystem == false>
+	            			否
+	            		<#else>
+	            			是
+	            		</#if>
+	            	</td>
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+    		<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+    			<option value="20" <#if pager.pageSize == 20> selected</#if>>20</option>
+    			<option value="50" <#if pager.pageSize == 50> selected</#if>>50</option>
+    			<option value="100"<#if pager.pageSize == 100> selected</#if>>100</option>
+    			<option value="200"<#if pager.pageSize == 200> selected</#if>>200</option>
+    		</select>
+			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalCount!}</font>条，共<font style="color:red;font-weight:bold;">${pager.pageCount!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="${pager.totalCount!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
+	</div>
+</div>
+

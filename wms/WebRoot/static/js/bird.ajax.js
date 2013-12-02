@@ -193,7 +193,7 @@ var reloadModel = {
 					$.pdialog.reload(cUrl,data);
 				}
 			}else{
-				alert("本页面没有设置dialogId，请设置!");
+				$.pdialog.closeCurrent();
 			}
 			reloadModel.page = undefined;
 		}else{
@@ -292,13 +292,15 @@ function dialogResetDone(json,form){
 				$.pdialog.reload(cUrl,data);
 			}
 		}else{
-			alert("本页面没有设置dialogId，请设置!");
+			$.pdialog.closeCurrent();
 		}
 		//重新加载付父navTab
 		if (json.navTabId){
 			navTab.reload(json.forwardUrl, {navTabId: json.navTabId});
 		} else if (json.rel) {
 			navTabPageBreak({}, json.rel);
+		}else{
+			navTab.reload();
 		}
 	}
 }
@@ -324,7 +326,7 @@ function dialogResetDoneForMultTab(json,form){
 				$.pdialog.reload(cUrl,data);
 			}
 		}else{
-			alert("本页面没有设置dialogId，请设置!");
+			$.pdialog.closeCurrent();
 		}
 		var curTab=$("#curTab",navTab.getCurrentPanel()).val();
 		$("#"+curTab,navTab.getCurrentPanel()).trigger("click");
@@ -352,7 +354,7 @@ function dialogResetDoneForMultTabOfCurrentDialog(json,form){
 				$.pdialog.reload(cUrl,data);
 			}
 		}else{
-			alert("本页面没有设置dialogId，请设置!");
+			$.pdialog.closeCurrent();
 		}
 		var parentdialogId = $("#parentDiaglog",$p).val();
 		if(parentdialogId){
@@ -405,7 +407,7 @@ function dialogResetOnlyDone(json,form){
 				$.pdialog.reload(cUrl,data);
 			}
 		}else{
-			alert("本页面没有设置dialogId，请设置!");
+			$.pdialog.closeCurrent();
 		}
 	}
 }
@@ -490,7 +492,7 @@ function dialogSearch(form, dialogId){
 			$.pdialog.reload($form.attr("action"),{dialogId:dialogId,data:$form.serializeArray()});
 		}
 	}else{
-		alert("本页面没有设置dialogId，请设置!");
+		$.pdialog.closeCurrent();
 	}
 	return false;
 }
@@ -580,7 +582,7 @@ function birdPageBreak(options,$p){
 					if (form) $.pdialog.reload($(form).attr("action"), {dialogId:dialogId,data: params, callback: op.callback});
 				}
 			}else{
-				alert("本页面没有设置dialogId，请设置!");
+				$.pdialog.closeCurrent();
 			}
 			
 		} else {

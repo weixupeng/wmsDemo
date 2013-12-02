@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-02 17:04:23
+Date: 2013-12-02 23:30:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -231,15 +231,12 @@ CREATE TABLE `sys_userinfo` (
   `createDate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifyDate` datetime DEFAULT NULL COMMENT '修改日期',
   `username` varchar(32) DEFAULT NULL COMMENT '用户登录名',
-  `deptId` varchar(32) DEFAULT NULL COMMENT '部门ID',
   `realname` varchar(12) DEFAULT NULL COMMENT '真实姓名',
-  `ename` varchar(12) DEFAULT NULL COMMENT '英文名',
   `pwd` varchar(32) DEFAULT NULL COMMENT '登录密码',
-  `tel` varchar(32) DEFAULT NULL COMMENT '电话',
-  `fax` varchar(32) DEFAULT NULL COMMENT '传真',
+  `mobile` varchar(32) DEFAULT NULL COMMENT '移动电话号码',
   `email` varchar(32) DEFAULT NULL COMMENT '邮件',
   `qq` varchar(32) DEFAULT NULL COMMENT 'QQ',
-  `mobile` varchar(32) DEFAULT NULL COMMENT '移动电话号码',
+  `tel` varchar(32) DEFAULT NULL COMMENT '电话',
   `memo` varchar(64) DEFAULT NULL COMMENT '备注',
   `inuse` int(11) DEFAULT NULL COMMENT '是否停用',
   `tag` varchar(255) DEFAULT NULL,
@@ -251,9 +248,4 @@ CREATE TABLE `sys_userinfo` (
 -- ----------------------------
 -- Records of sys_userinfo
 -- ----------------------------
-INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-09-17 01:27:43', 'admin', null, '系统管理员', null, '21232f297a57a5a743894a0e4a801fc3', '15201329157', '33333333', 'tangffei@163.com', '112050846', '15201329157', null, '0', 'admin 系统管理员 null', '');
-INSERT INTO `sys_userinfo` VALUES ('2', '2013-11-05 23:10:38', '2013-11-05 23:10:40', 'lzy', null, 'lzy', 'lzy', 'e03079c5f4a883fe00d2adadfc1a7311', null, null, null, null, null, null, null, null, '');
-INSERT INTO `sys_userinfo` VALUES ('3', '2013-11-05 23:21:30', '2013-11-05 23:21:32', 'jzp', null, 'jzp', 'jzp', '2602782797bd22105ca0c2b3e6e39849', null, null, null, null, null, null, null, null, '');
-INSERT INTO `sys_userinfo` VALUES ('4', '2013-11-05 23:22:36', '2013-11-05 23:22:38', 'zfc', null, 'zfc', 'zfc', '43d84e44712b09d1636dcaf781d899c9', null, null, null, null, null, null, null, null, '');
-INSERT INTO `sys_userinfo` VALUES ('5', '2013-11-05 23:23:27', '2013-11-05 23:23:29', 'yl', null, 'yl', 'yl', '1c4176eb812faed22c5821ed53823336', null, null, null, null, null, null, null, null, '');
-INSERT INTO `sys_userinfo` VALUES ('6', '2013-11-05 23:24:17', '2013-11-05 23:24:22', 'zjl', null, 'zjl', 'zjl', 'eccd898ab480ff8ee1ba168f4ca3de2c', null, null, null, null, null, null, null, null, '');
+INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-09-17 01:27:43', 'admin', '系统管理员', '21232f297a57a5a743894a0e4a801fc3', '15201329157', 'tangffei@163.com', '112050846', '15201329157', null, '0', 'admin 系统管理员 null', '');

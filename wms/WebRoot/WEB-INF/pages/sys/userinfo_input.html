@@ -1,0 +1,60 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="sys/userinfo/<#if userinfo?? && userinfo.id??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+  <input type=hidden id="id" name="id"  value="${(userinfo.id)!}">
+  <input type=hidden name="username.id"  value="${(userinfo.id)!}">
+	<div class="pageFormContent" layoutH="56">
+		<dl>
+			<dt>用户名：</dt>
+			<dd><input type=text style="width:100px;" name="userinfo.username"   value="${(userinfo.username)!}" oldValue="${(userinfo.username)!}"  onchange="migr.commonCheckStr(this)" class="required" remote='sys/userinfo/checkNameIsExist?id=${(userinfo.id)!}'   maxlength="30" <#if userinfo?? && userinfo.id??>readonly="readonly"</#if>></dd>
+		</dl>
+		
+		<#if (userinfo.id)! == "">
+    		<dl>
+    			<dt>密码：</dt>
+    			<dd><input type=password id="pwd" name="userinfo.pwd"  style="width:100px;"  value="" class="required"   maxlength="30"></dd>
+    		</dl>
+			
+			<dl>
+				<dt>重复密码：</dt>
+				<dd><input type=password  name="confirmPassword"  style="width:100px;"  value=""     equalTo='#pwd' class="required"    maxlength="30"></dd>
+			</dl>
+		</#if>
+		<dl>
+			<dt>真实姓名：</dt>
+			<dd><input type="text" style="width:100px;" name="userinfo.realname"  value="${(userinfo.realname)!}"></dd>
+		</dl>
+		<dl>
+			<dt>手机：</dt>
+			<dd><input type=text style="width:100px;" name=userinfo.mobile  value="${(userinfo.mobile)!}"></dd>
+		</dl>
+		<dl>
+			<dt>电话：</dt>
+			<dd><input type=text style="width:100px;" name=userinfo.tel  value="${(userinfo.tel)!}"></dd>
+		</dl>
+		<dl>
+			<dt>Email：</dt>
+			<dd><input type=text style="width:100px;" name=userinfo.email value="${(userinfo.email)!}"  class="email"></dd>
+		</dl>
+		<dl>
+			<dt>QQ：</dt>
+			<dd><input type=text style="width:100px;" name=userinfo.qq  value="${(userinfo.qq)!}"  class="number"></dd>
+		</dl>
+		<dl>
+			<dt>账户状态：</dt>
+			<dd>
+				<select name=userinfo.inuse style="width:100px;">
+		  			<option value="0" <#if userinfo?? && userinfo.inuse == 0> selected </#if> >正常</option>
+		  			<option value="1" <#if userinfo?? && userinfo.inuse == 1> selected </#if> >停用</option>
+				</select>
+			</dd>
+		</dl>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

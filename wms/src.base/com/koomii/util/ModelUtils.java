@@ -10,4 +10,8 @@ public class ModelUtils {
 		m.set("createDate", new Date());
 		m.set("modifyDate", new Date());
 	}
+	
+	public static void fillForUpdate(Model m){
+		m.set("modifyDate", new Date());
+	}
 }

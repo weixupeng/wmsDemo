@@ -20,6 +20,7 @@ import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.render.ViewType;
 import com.koomii.api.common.ModelConfigRyz;
 import com.koomii.api.common.RouteConfigRyz;
+import com.koomii.sys.controller.UserinfoController;
 import com.koomii.sys.model.Userinfo;
 
 /**
@@ -55,8 +56,9 @@ public class JFinalWebConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		this.routes = me;
 		me.add("/", IndexController.class);
-		me.add("/userinfo", IndexController.class);
+		me.add("/sys/userinfo", UserinfoController.class);
 		RouteConfigRyz.config(me);
+		
 	}
 	
 	/**

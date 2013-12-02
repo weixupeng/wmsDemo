@@ -50,7 +50,7 @@ var alertMsg = {
 			this._closeTimer = null;
 		}
 		if (this._types.info == type || this._types.correct == type){
-			this._closeTimer = setTimeout(function(){alertMsg.close()}, 2000);
+			this._closeTimer = setTimeout(function(){alertMsg.close()}, 4000);
 		} else {
 			$(this._bgId).show();
 		}
