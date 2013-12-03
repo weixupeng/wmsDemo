@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-02 23:30:55
+Date: 2013-12-03 16:17:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -134,36 +134,6 @@ INSERT INTO `ryz_ruyibi_flow` VALUES ('cba769d3896041619aef9d1c4a73251f', '2013-
 INSERT INTO `ryz_ruyibi_flow` VALUES ('f63cbe45aea046769f6254d2079e1c1d', '2013-11-03 14:27:35', '2013-11-03 14:27:35', '1', null, '0', null, '100', '130cbd7aa5c541c98d3d410f1b649a8b');
 
 -- ----------------------------
--- Table structure for `sys_moudle`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_moudle`;
-CREATE TABLE `sys_moudle` (
-  `id` varchar(32) NOT NULL COMMENT '记录编号',
-  `createDate` datetime DEFAULT NULL COMMENT '创建日期',
-  `modifyDate` datetime DEFAULT NULL COMMENT '修改日期',
-  `tname` varchar(128) DEFAULT NULL COMMENT '表名',
-  `cname` varchar(128) DEFAULT NULL COMMENT '中文名',
-  `ename` varchar(128) DEFAULT NULL COMMENT '英文名',
-  `parent` varchar(32) DEFAULT NULL COMMENT '上级名称',
-  `url` varchar(256) DEFAULT NULL COMMENT 'url',
-  `authUrl` text COMMENT '相关权限的URL，是JSON数组格式',
-  `nmethod` varchar(32) DEFAULT NULL COMMENT '执行方法',
-  `remark` varchar(128) DEFAULT NULL COMMENT 'div参数',
-  `level` int(11) DEFAULT NULL COMMENT '级别',
-  `act` varchar(256) DEFAULT NULL COMMENT '执行网址',
-  `grantType` int(11) DEFAULT NULL COMMENT '授权类型，2新增/4修改/8删除',
-  `type` int(11) DEFAULT NULL COMMENT '功能类型',
-  `inuse` int(11) DEFAULT NULL COMMENT '0不使用 1使用',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_sys_moudle_tname` (`tname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='功能模块表';
-
--- ----------------------------
--- Records of sys_moudle
--- ----------------------------
-INSERT INTO `sys_moudle` VALUES ('daca88e0b7d2102f8ebedd5a28bb34d0', '2012-03-05 13:18:42', '2012-03-05 13:18:42', 'ymwz', '页面/文章', '页面/文章', '2', '', null, '', '', '0', 'dialog', null, '0', '1');
-
--- ----------------------------
 -- Table structure for `sys_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
@@ -180,24 +150,6 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('402881e334cbcea20134cbd7c7b60002', '2012-01-11 16:17:23', '2012-02-27 16:17:42', '连锁总部', '总部管理人员');
-
--- ----------------------------
--- Table structure for `sys_rolemoudle`
--- ----------------------------
-DROP TABLE IF EXISTS `sys_rolemoudle`;
-CREATE TABLE `sys_rolemoudle` (
-  `id` varchar(32) NOT NULL COMMENT '记录编号',
-  `createDate` datetime DEFAULT NULL COMMENT '创建日期',
-  `modifyDate` datetime DEFAULT NULL COMMENT '修改日期',
-  `tname` varchar(128) DEFAULT NULL COMMENT '模块名',
-  `roleId` varchar(32) DEFAULT NULL COMMENT '用户名',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of sys_rolemoudle
--- ----------------------------
-INSERT INTO `sys_rolemoudle` VALUES ('q', '2013-09-26 16:41:22', '2013-09-26 16:41:25', 'ymwz', '402881e334cbcea20134cbd7c7b60002');
 
 -- ----------------------------
 -- Table structure for `sys_roleuser`
@@ -249,3 +201,173 @@ CREATE TABLE `sys_userinfo` (
 -- Records of sys_userinfo
 -- ----------------------------
 INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-09-17 01:27:43', 'admin', '系统管理员', '21232f297a57a5a743894a0e4a801fc3', '15201329157', 'tangffei@163.com', '112050846', '15201329157', null, '0', 'admin 系统管理员 null', '');
+
+-- ----------------------------
+-- Table structure for `wms_customer`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_customer`;
+CREATE TABLE `wms_customer` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_customer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_employe`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_employe`;
+CREATE TABLE `wms_employe` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_employe
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_flow`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_flow`;
+CREATE TABLE `wms_flow` (
+  `id` varchar(32) NOT NULL,
+  `type` int(11) NOT NULL,
+  `formId` varchar(32) NOT NULL,
+  `inStorage` varchar(32) DEFAULT NULL,
+  `stStorage` varchar(32) DEFAULT NULL,
+  `outStorage` varchar(32) DEFAULT NULL,
+  `materialId` varchar(32) NOT NULL,
+  `materialName` varchar(32) DEFAULT NULL,
+  `quantity` double NOT NULL,
+  `createDate` datetime NOT NULL,
+  `worker` varchar(32) DEFAULT NULL,
+  `operator` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_flow
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_form`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_form`;
+CREATE TABLE `wms_form` (
+  `id` varchar(32) NOT NULL,
+  `type` int(11) NOT NULL,
+  `createDate` datetime NOT NULL,
+  `worker` varchar(32) NOT NULL,
+  `inStorage` varchar(32) DEFAULT NULL,
+  `outStorage` varchar(32) DEFAULT NULL,
+  `stStorage` varchar(32) DEFAULT NULL,
+  `customer` varchar(32) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `oprator` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_form
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_form_detail`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_form_detail`;
+CREATE TABLE `wms_form_detail` (
+  `id` varchar(32) NOT NULL,
+  `formId` varchar(32) NOT NULL,
+  `materialId` varchar(32) NOT NULL,
+  `materialName` varchar(32) DEFAULT NULL,
+  `quantity` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_form_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_inventory`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_inventory`;
+CREATE TABLE `wms_inventory` (
+  `id` varchar(32) NOT NULL,
+  `storageId` varchar(32) NOT NULL,
+  `materialId` char(10) NOT NULL,
+  `quantity` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_inventory
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_inventory_bin`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_inventory_bin`;
+CREATE TABLE `wms_inventory_bin` (
+  `id` varchar(32) NOT NULL,
+  `storageId` varchar(32) NOT NULL,
+  `storageBinId` varchar(32) NOT NULL,
+  `storageBinCode` varchar(32) NOT NULL,
+  `materialId` varchar(32) NOT NULL,
+  `quantity` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_inventory_bin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_material`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_material`;
+CREATE TABLE `wms_material` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `price` double(32,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_material
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_storage`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_storage`;
+CREATE TABLE `wms_storage` (
+  `id` varchar(32) NOT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_storage
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `wms_storage_bin`
+-- ----------------------------
+DROP TABLE IF EXISTS `wms_storage_bin`;
+CREATE TABLE `wms_storage_bin` (
+  `id` varchar(32) NOT NULL,
+  `binCode` varchar(32) NOT NULL,
+  `storeId` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wms_storage_bin
+-- ----------------------------
