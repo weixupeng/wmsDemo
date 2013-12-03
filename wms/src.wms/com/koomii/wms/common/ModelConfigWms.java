@@ -2,20 +2,14 @@ package com.koomii.wms.common;
 
 import com.jfinal.core.JFinal;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.koomii.api.ryz.model.Feedback;
-import com.koomii.api.ryz.model.PkInfo;
-import com.koomii.api.ryz.model.RuyibiFlow;
-import com.koomii.api.ryz.model.Account;
+import com.koomii.wms.model.Storage;
 
 public class ModelConfigWms {
 	
-	public static final String TABLE_Account = "ryz_account";
-	public static final String TABLE_PKInfo = "ryz_pankou_info";
-	public static final String TABLE_Flow = "ryz_ruyibi_flow";
-	public static final String TABLE_Feedback = "ryz_feedback";
+	public static final String TABLE_Storage = "wms_storage";
 	
 	public static void config(ActiveRecordPlugin arp){
-		arp.addMapping(TABLE_Account,Account.class);
+		arp.addMapping(TABLE_Storage,Storage.class);
 	}
 	/**
 	 * 建议使用 JFinal 手册推荐的方式启动项目

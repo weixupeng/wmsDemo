@@ -22,6 +22,8 @@ import com.koomii.api.common.ModelConfigRyz;
 import com.koomii.api.common.RouteConfigRyz;
 import com.koomii.sys.controller.UserinfoController;
 import com.koomii.sys.model.Userinfo;
+import com.koomii.wms.common.ModelConfigWms;
+import com.koomii.wms.common.RouteConfigWms;
 
 /**
  * API引导式配置
@@ -58,6 +60,7 @@ public class JFinalWebConfig extends JFinalConfig {
 		me.add("/", IndexController.class);
 		me.add("/sys/userinfo", UserinfoController.class);
 		RouteConfigRyz.config(me);
+		RouteConfigWms.config(me);
 		
 	}
 	
@@ -87,6 +90,7 @@ public class JFinalWebConfig extends JFinalConfig {
 		arp.addMapping("sys_userinfo",Userinfo.class);
 		//配置models
 		ModelConfigRyz.config(arp);
+		ModelConfigWms.config(arp);
 		//配置shiro插件
 		me.add(new ShiroPlugin(this.routes));
 	}

@@ -2,14 +2,12 @@ package com.koomii.wms.common;
 
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.koomii.api.ryz.controller.ConsoleController;
-import com.koomii.api.ryz.controller.PkInfoController;
-import com.koomii.api.ryz.controller.UserInfoController;
+import com.koomii.wms.controller.StorageController;
 
 public class RouteConfigWms {
 	
 	public static void config(Routes me){
-		me.add("/api/u", UserInfoController.class);
+		me.add("/wms/storage", StorageController.class);
 	}
 	
 	/**
