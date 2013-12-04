@@ -2,18 +2,48 @@ package com.koomii.base;
 
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
+import com.koomii.util.ChristStringUtil;
 
 public class BaseController extends Controller {
 //	public static Gson gson = new Gson();
 	public static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	
-	
+	/**
+	 * 查询指定字段的数据是否存在
+	 * @param tableName
+	 * @param colum
+	 * @param checkValue
+	 * @return true:不存在，false：存在
+	 */
+	public boolean checkIsNotExist(String tableName,String colum,String checkValue){
+		StringBuffer sql = new StringBuffer("select ").append(colum).append(" from ").append(tableName).
+				append(" where ").append(colum).append(" = ? ");
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(checkValue);
+		
+		String id = getPara("id");
+		if(ChristStringUtil.isNotEmpty(id)){
+			sql.append(" and id != ? ");
+			params.add(id);
+		}
+		Record record = Db.findFirst(sql.toString(),params.toArray());
+		if(record.get(colum) != null){
+			return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * 转换dwz json格式输出

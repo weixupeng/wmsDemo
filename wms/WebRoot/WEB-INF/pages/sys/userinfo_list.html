@@ -21,9 +21,9 @@
 <div class="pageContent" style="padding:0px">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" target="dialog"  width="580" height="400"  href="sys/userinfo/add"><span>新增</span></a></li>
+			<li><a class="add" target="dialog"  width="580" height="430"  href="sys/userinfo/add"><span>新增</span></a></li>
 			<li class="line">line</li>
-			<li><a class="edit" href="sys/userinfo/edit?id={sid_obj}" width="580" height="400" target="dialog"><span>修改</span></a></li>
+			<li><a class="edit" href="sys/userinfo/edit?id={sid_obj}" width="580" height="430" target="dialog"><span>修改</span></a></li>
 			<li class="line">line</li>
 			<li><a class="delete" href="sys/userinfo/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
 			<li class="line">line</li>
@@ -85,9 +85,9 @@
     			<option value="100"<#if pager.pageSize == 100> selected</#if>>100</option>
     			<option value="200"<#if pager.pageSize == 200> selected</#if>>200</option>
     		</select>
-			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalCount!}</font>条，共<font style="color:red;font-weight:bold;">${pager.pageCount!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalRow!}</font>条，共<font style="color:red;font-weight:bold;">${pager.totalPage!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
 		</div>
-		<div class="pagination" targetType="navTab" totalCount="${pager.totalCount!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
+		<div class="pagination" targetType="navTab" totalCount="${pager.totalRow!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
 	</div>
 </div>
 

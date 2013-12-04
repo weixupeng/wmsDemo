@@ -4,48 +4,35 @@
    	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
 	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
    		也可以在searchForm上设置属性rel=”pagerForm”，js框架会自动把searchForm搜索条件复制到pagerForm中 -->
-	<div class="pageHeader">
-		<div class="searchBar">
-    		<table class="searchContent">
-    			<tr>
-    				<td>
-    					请输入：<input type="text" class="focus highlightText" size="40" name="tag" value="${(tag)!}" alt="用户名、真实名称"/>
-    				</td>
-					
-    				<td><div class="button"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
-    			</tr>
-    		</table>
-    	</div>
-	</div>
 </form>
 <div class="pageContent" style="padding:0px">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" target="dialog"  width="580" height="400"  href="wms/storage/add"><span>新增</span></a></li>
+			<li><a class="add" target="dialog"  width="500" height="250"  href="wms/storage/add"><span>新增</span></a></li>
 			<li class="line">line</li>
-			<li><a class="edit" href="wms/storage/edit?id={sid_obj}" width="580" height="400" target="dialog"><span>修改</span></a></li>
+			<li><a class="edit" href="wms/storage/edit?id={sid_obj}" width="500" height="250" target="dialog"><span>修改</span></a></li>
 			<li class="line">line</li>
 			<li><a class="delete" href="wms/storage/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
 		</ul>
 	</div>
 	
-	<table class="table" layoutH="112">
+	<table class="table" layoutH="77">
 		<thead>
 			<tr>
-				<th width="50" align="left"><input type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
-				<th width="80" align="left">仓库号</th>
-				<th width="80" align="left">仓库名称</th>
+				<th width="80" align="left"><input type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
+				<th width="150" align="left">仓库号</th>
+				<th width="150" align="left">仓库名称</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list pager.list as storage>
-				<tr target="sid_obj" rel="${storage.id!}" ondblclick="migr.baseMoudleDblick(this)"> 
+				<tr target="sid_obj" rel="${(storage.id)!}" ondblclick="migr.baseMoudleDblick(this)"> 
 					<td align="left">
-						<input name="ids" type="checkbox" value="${storage.id!}"/>
+						<input name="ids" type="checkbox" value="${(storage.id)!}"/>
 						${storage_index + 1}
 					</td>
-	            	<td align="left">${storage.id!}</td>
-	            	<td align="left">${storage.name!}</td>
+	            	<td align="left">${(storage.id)!}</td>
+	            	<td align="left">${(storage.name)!}</td>
 				</tr>
 			</#list>
 		</tbody>
@@ -59,9 +46,9 @@
     			<option value="100"<#if pager.pageSize == 100> selected</#if>>100</option>
     			<option value="200"<#if pager.pageSize == 200> selected</#if>>200</option>
     		</select>
-			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalCount!}</font>条，共<font style="color:red;font-weight:bold;">${pager.pageCount!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalRow!}</font>条，共<font style="color:red;font-weight:bold;">${pager.totalPage!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
 		</div>
-		<div class="pagination" targetType="navTab" totalCount="${pager.totalCount!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
+		<div class="pagination" targetType="navTab" totalCount="${pager.totalRow!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
 	</div>
 </div>
 

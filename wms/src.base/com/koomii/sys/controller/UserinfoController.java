@@ -38,23 +38,8 @@ public class UserinfoController extends BaseController {
 		render("../userinfo_input.html");
 	}
 	
-	public void checkNameIsExist(){
-		String id = getPara("id");
-		String username = getPara("userinfo.username");
-		if(ChristStringUtil.isNotEmpty(id)){
-			Record record = Db.findFirst("select username from sys_userinfo where id != ? and username=?", id,username);
-			if(record.get("username") != null){
-				renderJson("false");
-				return;
-			}
-		}else{
-			Record record = Db.findFirst("select username from sys_userinfo where username=?", username);
-			if(record.get("username") != null){
-				renderJson("false");
-				return;
-			}
-		}
-		renderJson("true");
+	public void checkIsNotExist(){
+		renderJson(checkIsNotExist("sys_userinfo", "username", getPara("userinfo.username")));
 	}
 	
 	public void save(){
@@ -63,6 +48,13 @@ public class UserinfoController extends BaseController {
 		String md5Pwd = ChristStringUtil.md5(pwd);
 		model.set("pwd",md5Pwd);
 		model.set("isSystem", false);
+		StringBuffer tag = new StringBuffer();
+		tag.append(";").append(model.getStr("username")).append(",");
+		String realName = model.get("realname");
+		if(ChristStringUtil.isNotEmpty(realName)){
+			tag.append(";").append(realName).append(",");
+		}
+		model.set("tag",tag.toString());
 		ModelUtils.fillForSave(model);
 		model.save();
 		renderDWZSuccessJson("创建用户成功！");
@@ -77,6 +69,13 @@ public class UserinfoController extends BaseController {
 		String id = getPara("id");
 		Userinfo model = getModel(Userinfo.class, "userinfo");
 		model.set("id", id);
+		StringBuffer tag = new StringBuffer();
+		tag.append(";").append(model.getStr("username")).append(",");
+		String realName = model.get("realname");
+		if(ChristStringUtil.isNotEmpty(realName)){
+			tag.append(";").append(realName).append(",");
+		}
+		model.set("tag",tag.toString());
 		ModelUtils.fillForUpdate(model);
 		model.update();
 		renderDWZSuccessJson("修改用户成功！");

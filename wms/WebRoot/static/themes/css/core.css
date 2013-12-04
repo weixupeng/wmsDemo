@@ -519,8 +519,9 @@ fieldset legend {padding:2px; border:1px dotted #B8D0D6; font-weight: bold;}
 fieldset legend:hover {background-color: #dddddd;}
 
 .formBar { clear:both; padding:0 5px; height:30px; padding-top:5px; border-style:solid; border-width:1px 0 0 0;}
-.formBar ul { float:right;}
-.formBar li { float:left; margin-left:5px;}
+//.formBar ul { float:right;}
+.formBar ul { margin-left:70px;}
+.formBar li { float:left; margin-left:15px;}
 .divider { clear:both; display:block; overflow:hidden; text-indent:-1000px; width:auto; height:1px; padding:4px 0 0 0; margin-bottom:5px; border-style:dotted; border-width:0 0 1px 0;}
 
 /* Pages dialog */
@@ -543,7 +544,7 @@ fieldset legend:hover {background-color: #dddddd;}
 /* contentTitle */
 h2.contentTitle{margin-bottom:10px; padding:0 10px; line-height:30px; font-size:14px; border-bottom:solid 1px #CCC;}
 h3.contentTitle{margin-bottom:5px; line-height:25px; font-size:13px; border-bottom:solid 1px #CCC;clear:both;}
-.dialog h2.contentTitle {border:none}
+#dialog h2.contentTitle {border:none}
 
 /* rightMenu */
 #contextmenu{display:none; position:absolute; z-index:500; left:0; top:0;}
