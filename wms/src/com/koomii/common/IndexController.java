@@ -14,9 +14,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import com.alibaba.fastjson.JSONObject;
+import com.jfinal.aop.Before;
 import com.koomii.base.BaseController;
 import com.koomii.sys.model.Userinfo;
 import com.koomii.util.ChristStringUtil;
+
 
 public class IndexController extends BaseController {
 	
@@ -30,6 +32,8 @@ public class IndexController extends BaseController {
 		}
 		
 	}
+	
+	
 	
 	public void login(){
 		if(SecurityUtils.getSubject().isAuthenticated()){

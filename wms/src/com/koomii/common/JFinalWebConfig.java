@@ -57,6 +57,7 @@ public class JFinalWebConfig extends JFinalConfig {
 	 */
 	public void configRoute(Routes me) {
 		this.routes = me;
+		me.add("/jhtml",HtmlController.class);
 		me.add("/", IndexController.class);
 		me.add("/sys/userinfo", UserinfoController.class);
 		RouteConfigRyz.config(me);
@@ -112,6 +113,7 @@ public class JFinalWebConfig extends JFinalConfig {
 		me.add(new SessionHandler());
 		DruidStatViewHandler dvh =  new DruidStatViewHandler("/druid");
 		me.add(dvh);
+		me.add(new HtmlHandler());
 	}
 	
 	/**
