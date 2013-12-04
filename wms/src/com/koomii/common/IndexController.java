@@ -26,9 +26,9 @@ public class IndexController extends BaseController {
 	public void index(){
 		if(SecurityUtils.getSubject().isAuthenticated()){
 			//登录了，跳转登录界面
-			redirect("main");
+			redirect("/main");
 		}else{
-			redirect("login");
+			redirect("/login");
 		}
 		
 	}
@@ -38,7 +38,7 @@ public class IndexController extends BaseController {
 	public void login(){
 		if(SecurityUtils.getSubject().isAuthenticated()){
 			//登录了，跳转登录界面
-			redirect("main");
+			redirect("/main");
 		}
 		render("common/login.html");
 	}
@@ -116,7 +116,7 @@ public class IndexController extends BaseController {
 			Session session = subject.getSession(true);
 			session.removeAttribute("loginUser");
 			subject.logout();
-			redirect("index");
+			redirect("/index");
 		} catch (AuthenticationException e) {
 			e.printStackTrace();
 			renderText("异常："+e.getMessage());
