@@ -11,6 +11,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.ext.plugin.shiro.ShiroInterceptor;
 import com.jfinal.ext.plugin.shiro.ShiroPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -102,6 +103,8 @@ public class JFinalWebConfig extends JFinalConfig {
 	public void configInterceptor(Interceptors me) {
 		//shiro权限拦截器配置
         me.add(new ShiroInterceptor());
+        //让freemarker可以使用session
+        me.add(new SessionInViewInterceptor());
 	}
 	
 	/**
@@ -109,8 +112,6 @@ public class JFinalWebConfig extends JFinalConfig {
 	 */
 	public void configHandler(Handlers me) {
 		me.add(new ContextPathHandler());
-		//让freemarker可以使用session
-		me.add(new SessionHandler());
 		DruidStatViewHandler dvh =  new DruidStatViewHandler("/druid");
 		me.add(dvh);
 		me.add(new HtmlHandler());
