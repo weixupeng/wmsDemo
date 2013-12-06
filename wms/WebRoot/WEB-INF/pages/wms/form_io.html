@@ -1,0 +1,33 @@
+<#include "../common/_layout.html"/>
+<@layout>
+<form method="post" action="wms/storage/save" class="pageForm" onsubmit="">
+	<input type="hidden" id="id" name="id" value="">
+	<div class="pageFormContent" layouth="56" style="height: 155px; overflow: auto;">
+		<h2 class="contentTitle">入库单</h2>
+		<fieldset>
+			<legend>单据信息</legend>
+			<dl>
+				<dt>入库仓库：</dt>
+				<dd>
+					<select name="storage.id" class="required combox">
+						<#list 
+						<option value=""></option>
+						</#list>
+					</select>
+				</dd>
+			</dl>
+			<dl>
+				<dt>仓库名称：</dt>
+				<dd><input type="text" name="storage.name" value="" class="required textInput" remote="wms/storage/checkNameIsNotExist?id="></dd>
+			</dl>
+			<dl>
+				<ul>
+					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+					<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+				</ul>
+			</dl>
+		</fieldset>
+	</div>
+	
+</form>
+</@layout>

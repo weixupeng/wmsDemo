@@ -2,12 +2,14 @@ package com.koomii.wms.common;
 
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.koomii.wms.controller.FormController;
 import com.koomii.wms.controller.StorageController;
 
 public class RouteConfigWms {
 	
 	public static void config(Routes me){
 		me.add("/wms/storage", StorageController.class);
+		me.add("/wms/form", FormController.class);
 	}
 	
 	/**
