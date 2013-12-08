@@ -1,33 +1,66 @@
 <#include "../common/_layout.html"/>
 <@layout>
-<form method="post" action="wms/storage/save" class="pageForm" onsubmit="">
+<div class="pageFormContent" layouth="300">
+	<h2 class="contentTitle">入库单</h2>
+	<form method="post" action="wms/storage/save" class="pageForm" onsubmit="">
 	<input type="hidden" id="id" name="id" value="">
-	<div class="pageFormContent" layouth="56" style="height: 155px; overflow: auto;">
-		<h2 class="contentTitle">入库单</h2>
-		<fieldset>
-			<legend>单据信息</legend>
-			<dl>
-				<dt>入库仓库：</dt>
-				<dd>
-					<select name="storage.id" class="required combox">
-						<#list 
-						<option value=""></option>
-						</#list>
-					</select>
-				</dd>
-			</dl>
-			<dl>
-				<dt>仓库名称：</dt>
-				<dd><input type="text" name="storage.name" value="" class="required textInput" remote="wms/storage/checkNameIsNotExist?id="></dd>
-			</dl>
-			<dl>
-				<ul>
-					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
-					<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
-				</ul>
-			</dl>
-		</fieldset>
-	</div>
-	
-</form>
+	<fieldset>
+		<legend>单据信息</legend>
+		<dl>
+			<dt>入库单号：</dt>
+			<dd><input type="text" name="form.optime" value="" class="required textInput"></dd>
+		</dl>
+		<dl>
+			<dt>入库仓库：</dt>
+			<dd>
+				<select name="form.inStorage" class="required combox">
+					<option>---请选择---</option>
+					<#list storageList as s>
+					<option value="${(s.id)!}">${(s.name)!}</option>
+					</#list>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>供应商：</dt>
+			<dd>
+				<select name="form.customer" class="required combox">
+					<option>---请选择---</option>
+					<#list customerList as s>
+					<option value="${(s.id)!}">${(s.name)!}</option>
+					</#list>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>入库时间：</dt>
+			<dd><input type="text" name="form.optime" value="" class="required textInput"></dd>
+		</dl>
+	</fieldset>
+	</form>
+	<fieldset>
+		<legend>单据明细</legend>
+		<dl style="width:830px;">
+			<dt>货物：</dt>
+			<dd style="width:400px;">
+				<input type="text" id="materialId" name="formDetail.materialId" value="" class="left required textInput">
+				<div class="left buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				<select name="materials" class="left combox hidden">
+					<option>---请选择---</option>
+				</select>
+				<span class="clear"></span>
+			</dd>
+		</dl>
+		<dl>
+			<dt>数量：</dt>
+			<dd>
+				<input type="text" id="quantity" name="formDetail.quantity" class="required textInput">
+				<div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div>
+			</dd>
+		</dl>
+		<table clss="table">
+			
+		</table>
+	</fieldset>
+</div>
 </@layout>
