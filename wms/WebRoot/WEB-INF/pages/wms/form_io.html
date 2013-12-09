@@ -55,12 +55,43 @@
 			<dt>数量：</dt>
 			<dd>
 				<input type="text" id="quantity" name="formDetail.quantity" class="required textInput">
-				<div class="buttonActive"><div class="buttonContent"><button type="submit">添加</button></div></div>
+				<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="add();">添加</button></div></div>
 			</dd>
 		</dl>
-		<table clss="table">
-			
-		</table>
 	</fieldset>
+	<table  class="tbfix">
+		<thead>
+			<tr>
+				<th>行项目号</th>
+				<th>货物</th>
+				<th>数量</th>
+			</tr>
+		</thead>
+		<tbody id="tplWrap"></tbody>
+	</table>
 </div>
+<script id="dataTpl" type="text/template">
+	{@each _ as o,index}
+	<tr>
+	  <td>@{++index}</td>
+	  <td>@{o.materialId}【@{o.materialName}】</td>
+	  <td>@{o.quantity}</td>
+	</tr>
+	{@/each}
+</script>
+<script type="text/javascript">
+	var tpl = $('#dataTpl').html();
+	var data = [
+		{"materialId":"111","materialName":"111","quantity":"1"},
+		{"materialId":"222","materialName":"222","quantity":"2"},
+		{"materialId":"333","materialName":"333","quantity":"3"}
+	];
+	var html = juicer(tpl,data);
+	$("#tplWrap").html(html);
+	function add(){
+		data.push({"materialId":"new","materialName":"Name","quantity":"3"});
+		var html = juicer(tpl,data);
+		$("#tplWrap").html(html);
+	}
+</script>
 </@layout>

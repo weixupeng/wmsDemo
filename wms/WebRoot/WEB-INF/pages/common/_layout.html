@@ -14,8 +14,16 @@
 <script src="static/js/jquery.validate.js" type="text/javascript"></script>
 <script src="static/js/jquery.validate.methods.js" type="text/javascript"></script>
 <script src="static/js/jquery.validate.cn.js" type="text/javascript"></script>
+<script src="static/js/juicer.js" type="text/javascript"></script>
+<script type="text/javascript">juicer.set({'tag::interpolateOpen': '@{'});</script>
 </head>
 <body style="background:#FFF">
+<style>
+	table.tbfix {width:100%; table-layout:fixed; background:#bbb;border-spacing:1px;}
+	td {padding:5px; background:#fff}
+	th{background:#eee;padding:5px;}
+	td.left {width:200px}
+</style>
 	<#nested>
 	<div style="height:100px;">&nbsp;</div>
 </body>

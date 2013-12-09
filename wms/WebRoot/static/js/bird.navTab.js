@@ -330,6 +330,11 @@ var navTab = {
 	openExternal:function(url, $panel){
 		var ih = navTab._panelBox.height();
 		$panel.html(Bird.frag["externalFrag"].replaceAll("{url}", url).replaceAll("{height}", ih+"px"));
+		$('iframe',$panel).bind('resizeIframe', function() {
+			var iframeHight = navTab._panelBox.height();
+			$(this).css("height",iframeHight);
+		});
+
 	},
 	/**
 	 * 

@@ -14,6 +14,7 @@ function initEnv() {
 	$(window).resize(function(){
 		initLayout();
 		$(this).trigger("resizeGrid");
+		$("iframe").trigger("resizeIframe");
 	});
 
 	var ajaxbg = $("#background,#progressBar");

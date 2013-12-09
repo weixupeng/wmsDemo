@@ -1,10 +1,9 @@
 @charset "utf-8";
 
 body{
-	display:block; text-align:left; position:absolute; z-index:42;background-color: #fff;
+	display:block; text-align:left; position:absolute; z-index:42;background-color: #fff;overflow:auto;
 }
 .pageFormContent{
-	overflow: hidden;
 	padding:10px;
 }
 .left{
