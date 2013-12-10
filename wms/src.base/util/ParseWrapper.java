@@ -1,4 +1,4 @@
-package com.koomii.util;
+package util;
 
 public class ParseWrapper {
 	public	static	int	parseInt( String s, int nDefault )

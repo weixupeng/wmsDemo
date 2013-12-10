@@ -1,4 +1,4 @@
-package com.koomii.util;
+package util;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

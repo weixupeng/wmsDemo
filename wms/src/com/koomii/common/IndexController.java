@@ -13,11 +13,12 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import util.ChristStringUtil;
+
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
 import com.koomii.base.BaseController;
 import com.koomii.sys.model.Userinfo;
-import com.koomii.util.ChristStringUtil;
 
 
 public class IndexController extends BaseController {

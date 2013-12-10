@@ -7,13 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import util.ChristStringUtil;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
-import com.koomii.util.ChristStringUtil;
 
 public class BaseController extends Controller {
 //	public static Gson gson = new Gson();

@@ -10,6 +10,11 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
+import util.ChristDateUtils;
+import util.ChristStringUtil;
+import util.CommonUtil;
+import util.ModelUtils;
+
 
 import com.alibaba.druid.util.Base64;
 import com.jfinal.aop.Before;
@@ -22,10 +27,6 @@ import com.koomii.api.ryz.validator.UserEditValidator;
 import com.koomii.api.ryz.validator.UserKeyValidator;
 import com.koomii.api.ryz.validator.UsernamePassowrdValidator;
 import com.koomii.common.Constant;
-import com.koomii.util.ChristDateUtils;
-import com.koomii.util.ChristStringUtil;
-import com.koomii.util.CommonUtil;
-import com.koomii.util.ModelUtils;
 
 public class UserInfoController extends BaseAPIController {
 	

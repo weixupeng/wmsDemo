@@ -2,9 +2,10 @@ package com.koomii.common;
 
 import java.io.File;
 
+import util.ChristStringUtil;
+
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
-import com.koomii.util.ChristStringUtil;
 
 public class HtmlController extends Controller {
 	public void index(){

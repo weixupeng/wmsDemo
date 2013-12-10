@@ -5,13 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import util.ChristStringUtil;
+import util.ModelUtils;
+
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.koomii.base.BaseController;
 import com.koomii.sys.model.Userinfo;
-import com.koomii.util.ChristStringUtil;
-import com.koomii.util.ModelUtils;
 
 public class UserinfoController extends BaseController {
 	public void index(){

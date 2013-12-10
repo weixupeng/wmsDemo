@@ -1,4 +1,4 @@
-package com.koomii.util;
+package util;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

@@ -1,4 +1,4 @@
-package com.koomii.util;
+package util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
