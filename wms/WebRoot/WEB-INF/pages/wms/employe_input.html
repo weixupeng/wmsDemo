@@ -1,0 +1,29 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="wms/employe/<#if (employe.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+		<input type="hidden" id="id" name="id"  value="${(employe.id)!}">
+		<div class="pageFormContent" layoutH="56">
+			<h2 class="contentTitle"><#if (employe.id)??>编辑员工资料<#else>创建新员工资料</#if></h2>
+			<dl> 
+				<dt>员工号：</dt>
+				<dd>
+					<input type="text" name="employe.id"   value="${(employe.id)!}" oldValue="${(employe.id)!}"
+						class="required" remote="wms/employe/checkIsNotExist?id=${(employe.id)!}"
+						maxlength="30" <#if (employe.id)??>readonly="readonly"</#if>/></dd>
+			</dl>
+			
+			<dl>
+				<dt>员工名：</dt>
+				<dd><input type="text" name="employe.name"  value="${(employe.name)!}"
+					class="required" remote="wms/employe/checkNameIsNotExist?id=${(employe.id)!}"></dd>
+			</dl>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -2,7 +2,6 @@ package com.koomii.wms.controller;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.koomii.base.BaseController;
-import com.koomii.sys.model.Userinfo;
 import com.koomii.wms.model.Storage;
 
 import static com.koomii.wms.common.ModelConfigWms.*;

@@ -1,0 +1,56 @@
+<base href="${CONTEXT_PATH}/" />
+<form id="pagerForm" action="wms/employe" onsubmit="return navTabSearch(this)" method="post">
+   	<input type="hidden" name="pager.pageNumber" value="${(pager.pageNumber)!}" /><!--【必须】value=1可以写死-->
+   	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
+	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
+   		也可以在searchForm上设置属性rel=”pagerForm”，js框架会自动把searchForm搜索条件复制到pagerForm中 -->
+</form>
+<div class="pageContent" style="padding:0px">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" target="dialog"  width="500" height="250"  href="wms/employe/add"><span>新增</span></a></li>
+			<li class="line">line</li>
+			<li><a class="edit" href="wms/employe/edit?id={sid_obj}" width="500" height="250" target="dialog"><span>修改</span></a></li>
+			<li class="line">line</li>
+			<li><a class="delete" href="wms/employe/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
+		</ul>
+	</div>
+	
+	<table class="table" layoutH="77">
+		<thead>
+			<tr>
+				<th width="80" align="left"><input type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
+				<th width="150" align="left">员工编号</th>
+				<th width="150" align="left">员工名</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<#list pager.list as employe>
+				<tr target="sid_obj" rel="${(employe.id)!}" ondblclick="migr.baseMoudleDblick(this)"> 
+					<td align="left">
+						<input name="ids" type="checkbox" value="${(employe.id)!}"/>
+						${employe_index + 1}
+					</td>
+	            	<td align="left">${(employe.id)!}</td>
+	            	<td align="left">${(employe.name)!}</td>
+	            	
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span>
+    		<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+    			<option value="20" <#if pager.pageSize == 20> selected</#if>>20</option>
+    			<option value="50" <#if pager.pageSize == 50> selected</#if>>50</option>
+    			<option value="100"<#if pager.pageSize == 100> selected</#if>>100</option>
+    			<option value="200"<#if pager.pageSize == 200> selected</#if>>200</option>
+    		</select>
+			<span>条，共<font style="color:red;font-weight:bold;">${pager.totalRow!}</font>条，共<font style="color:red;font-weight:bold;">${pager.totalPage!}</font>页&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="${pager.totalRow!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
+	</div>
+</div>
+
