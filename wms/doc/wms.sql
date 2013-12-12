@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost13306
+Source Server         : localhost
 Source Server Version : 50519
 Source Host           : localhost:13306
 Source Database       : wms
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-03 16:17:16
+Date: 2013-12-13 00:47:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -200,7 +200,7 @@ CREATE TABLE `sys_userinfo` (
 -- ----------------------------
 -- Records of sys_userinfo
 -- ----------------------------
-INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-09-17 01:27:43', 'admin', '系统管理员', '21232f297a57a5a743894a0e4a801fc3', '15201329157', 'tangffei@163.com', '112050846', '15201329157', null, '0', 'admin 系统管理员 null', '');
+INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-12-04 23:41:00', 'admin', '系统管理员', '21232f297a57a5a743894a0e4a801fc3', '15201329157', 'tangffei@163.com', '112050846', '15201329157', null, '0', ';admin,;系统管理员,', '');
 
 -- ----------------------------
 -- Table structure for `wms_customer`
@@ -216,6 +216,7 @@ CREATE TABLE `wms_customer` (
 -- ----------------------------
 -- Records of wms_customer
 -- ----------------------------
+INSERT INTO `wms_customer` VALUES ('1', '北京可口', '0');
 
 -- ----------------------------
 -- Table structure for `wms_employe`
@@ -264,6 +265,7 @@ CREATE TABLE `wms_form` (
   `type` int(11) NOT NULL,
   `createDate` datetime NOT NULL,
   `worker` varchar(32) NOT NULL,
+  `optime` datetime DEFAULT NULL,
   `inStorage` varchar(32) DEFAULT NULL,
   `outStorage` varchar(32) DEFAULT NULL,
   `stStorage` varchar(32) DEFAULT NULL,
@@ -336,12 +338,14 @@ CREATE TABLE `wms_material` (
   `id` varchar(32) NOT NULL,
   `name` varchar(32) NOT NULL,
   `price` double(32,2) DEFAULT NULL,
+  `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_material
 -- ----------------------------
+INSERT INTO `wms_material` VALUES ('1', '1', '1.00', ';1,;1,;1.00,');
 
 -- ----------------------------
 -- Table structure for `wms_storage`
@@ -356,6 +360,7 @@ CREATE TABLE `wms_storage` (
 -- ----------------------------
 -- Records of wms_storage
 -- ----------------------------
+INSERT INTO `wms_storage` VALUES ('1', '1');
 
 -- ----------------------------
 -- Table structure for `wms_storage_bin`
