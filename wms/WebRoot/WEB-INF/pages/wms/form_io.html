@@ -2,8 +2,10 @@
 <@layout>
 <div class="pageFormContent" layouth="300">
 	<h2 class="contentTitle">入库单</h2>
-	<form method="post" action="wms/storage/save" class="pageForm" onsubmit="">
+	<form id="ioForm" method="post" action="wms/storage/save" class="pageForm">
 	<input type="hidden" id="id" name="id" value="">
+	<input type="hidden" name="form.type" value="0">
+	<input type="hidden" id="status" name="form.status" value="0">
 	<fieldset>
 		<legend>单据信息</legend>
 		<dl>
@@ -43,14 +45,52 @@
 		<dl style="width:830px;">
 			<dt>货物：</dt>
 			<dd style="width:400px;">
-				<input type="text" id="materialId" name="formDetail.materialId" value="" class="left required textInput">
-				<div class="left buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
-				<select name="materials" class="left combox hidden">
+				<input type="text" id="materialId" name="tag" class="left required textInput">
+				<div class="left buttonActive"><div class="buttonContent"><button type="button" id="materialSearchBtn" action="/wms/form/searchMaterial">查询</button></div></div>
+				<select id="materials" name="materials" class="left combox hidden" onchange="selectMaterial(this);">
 					<option>---请选择---</option>
 				</select>
 				<span class="clear"></span>
 			</dd>
 		</dl>
+<script id="materialTpl" type="text/template">
+	<option>---请选择---</option>
+	{@each _ as o,index}
+	<option value="@{o.id}###@{o.name}">@{o.id}【@{o.name}】</option>
+	{@/each}
+</script>
+<script type="text/javascript">
+	var detail = {};
+	var detailList = [];
+	$("#materialSearchBtn").click(function(){
+		if($("#materialId").val() == ''){
+			alert("请输入货物编号或名称!");
+			return;
+		}
+		var btn = $(this);
+		var tpl = $('#materialTpl').html();
+		var params = $("#materialId").serializeArray();
+		$.ajax({
+			type: 'POST',
+			url:btn.attr("action"),
+			data:params,
+			dataType:"json",
+			success: function(data){
+				var html = juicer(tpl,data);
+				$("#materials").html(html).show();
+			}
+		});
+	});
+	function selectMaterial(obj){
+		var sel = $(obj);
+		var v = sel.val();
+		if(v){
+			var vals = v.split("###");
+			detail.materialId = vals[0];
+			detail.materialName = vals[1];
+		}
+	}
+</script>
 		<dl>
 			<dt>数量：</dt>
 			<dd>
@@ -59,39 +99,91 @@
 			</dd>
 		</dl>
 	</fieldset>
-	<table  class="tbfix">
-		<thead>
-			<tr>
-				<th>行项目号</th>
-				<th>货物</th>
-				<th>数量</th>
-			</tr>
-		</thead>
-		<tbody id="tplWrap"></tbody>
-	</table>
-</div>
-<script id="dataTpl" type="text/template">
+<script id="detailTpl" type="text/template">
 	{@each _ as o,index}
 	<tr>
 	  <td>@{++index}</td>
+	  <td>@{o.id}</td>
 	  <td>@{o.materialId}【@{o.materialName}】</td>
 	  <td>@{o.quantity}</td>
+	<td><a href="javascript:void(0);" onclick="del(this);" sid="@{o.id}">删除</a></td>
 	</tr>
 	{@/each}
 </script>
 <script type="text/javascript">
-	var tpl = $('#dataTpl').html();
-	var data = [
-		{"materialId":"111","materialName":"111","quantity":"1"},
-		{"materialId":"222","materialName":"222","quantity":"2"},
-		{"materialId":"333","materialName":"333","quantity":"3"}
-	];
-	var html = juicer(tpl,data);
-	$("#tplWrap").html(html);
+	var id = 1;
+	var tpl = $('#detailTpl').html();
 	function add(){
-		data.push({"materialId":"new","materialName":"Name","quantity":"3"});
-		var html = juicer(tpl,data);
-		$("#tplWrap").html(html);
+		if(!$("#materials").val()){
+			alert("请选择货物！");
+			return;
+		}
+		var q = $("#quantity");
+		detail.quantity = q.val();
+		detail.id = id;
+		id++;
+		if(!detail.quantity){
+			alert("请输入货物的入库数量！");
+			return;
+		}
+		detailList.push(detail);
+		detail = {};
+		q.val("");
+		$("#materials").html("").hide();
+		var html = juicer(tpl,detailList);
+		$("#detailTplWrap").html(html);
+	}
+	function del(obj){
+		var sid = $(obj).attr("sid");
+		for(var i=0;i<detailList.length;i++){
+			if(sid == detailList[i].id){
+				detailList.splice(i, 1);
+			}
+		}
+		var html = juicer(tpl,detailList);
+		$("#detailTplWrap").html(html);
+	}
+	function saveForm(obj){
+		var btn = $(obj);
+		if(detailList.length == 0){
+			alert("没有明细信息！");
+			return;
+		}
+		$("#status").val(btn.attr("status"));
+		var params = $("#ioForm").serializeArray();
+		params.push({"name":"detailList","value":$.toJSONString(detailList)});
+		$.ajax({
+			type: 'POST',
+			url:btn.attr("action"),
+			data:params,
+			dataType:"json",
+			success: function(data){
+				var html = juicer(tpl,data);
+				$("#materials").html(html).show();
+			}
+		});
 	}
 </script>
+	<table  class="tbfix">
+		<thead>
+			<tr>
+				<th style="width:80px;">行号</th>
+				<th style="width:80px;">项目号</th>
+				<th style="width:180px;">货物</th>
+				<th style="width:100px;">数量</th>
+				<th style="width:200px;">操作</th>
+			</tr>
+		</thead>
+		<tbody id="detailTplWrap"></tbody>
+	</table>
+</div>
+<h2 class="contentTitle">&nbsp;</h2>
+<ul class="toolBar">
+	<li>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0" action="wms/form/iosave">草稿</button></div></div>
+	</li>
+	<li>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0" action="wms/form/iosave">过账</button></div></div>
+	</li>
+</ul>
 </@layout>
