@@ -55,7 +55,6 @@ public class FormController extends BaseController {
 	public void iosave(){
 		//保存抬头
 		Form form = getModel(Form.class,"form");
-		form.set("id", CommonUtil.getUUID());
 		form.set("createDate", new Date());
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession(true);
@@ -71,8 +70,7 @@ public class FormController extends BaseController {
 			d.set("materialId", jo.getString("materialId"));
 			d.set("materialName", jo.getString("materialName"));
 			d.set("quantity", jo.getString("quantity"));
-			d.set("formId", form.getStr("id"));
-			d.set("id", CommonUtil.getUUID());
+			d.set("formId", form.getLong("id"));
 			d.save();
 		}
 		setAttr("message","入库操作成功！");

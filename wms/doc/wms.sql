@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-14 01:21:32
+Date: 2013-12-14 01:34:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -249,7 +249,7 @@ CREATE TABLE `wms_flow` (
   `worker` varchar(32) DEFAULT NULL,
   `operator` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_flow
@@ -272,7 +272,7 @@ CREATE TABLE `wms_form` (
   `status` int(11) DEFAULT NULL,
   `oprator` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_form
