@@ -2,8 +2,10 @@
 <@layout>
 <div class="pageFormContent" layouth="300">
 	<h2 class="contentTitle">入库单</h2>
-	<form method="post" action="wms/storage/save" class="pageForm" onsubmit="">
+	<form id="ioForm" method="post" action="wms/storage/save" class="pageForm">
 	<input type="hidden" id="id" name="id" value="">
+	<input type="hidden" name="form.type" value="0">
+	<input type="hidden" id="status" name="form.status" value="0">
 	<fieldset>
 		<legend>单据信息</legend>
 		<dl>
@@ -67,15 +69,15 @@
 		}
 		var btn = $(this);
 		var tpl = $('#materialTpl').html();
+		var params = $("#materialId").serializeArray();
 		$.ajax({
 			type: 'POST',
 			url:btn.attr("action"),
-			data:$("#materialId").serializeArray(),
+			data:params,
 			dataType:"json",
 			success: function(data){
 				var html = juicer(tpl,data);
 				$("#materials").html(html).show();
-				
 			}
 		});
 	});
@@ -141,6 +143,26 @@
 		var html = juicer(tpl,detailList);
 		$("#detailTplWrap").html(html);
 	}
+	function saveForm(obj){
+		var btn = $(obj);
+		if(detailList.length == 0){
+			alert("没有明细信息！");
+			return;
+		}
+		$("#status").val(btn.attr("status"));
+		var params = $("#ioForm").serializeArray();
+		params.push({"name":"detailList","value":$.toJSONString(detailList)});
+		$.ajax({
+			type: 'POST',
+			url:btn.attr("action"),
+			data:params,
+			dataType:"json",
+			success: function(data){
+				var html = juicer(tpl,data);
+				$("#materials").html(html).show();
+			}
+		});
+	}
 </script>
 	<table  class="tbfix">
 		<thead>
@@ -158,10 +180,10 @@
 <h2 class="contentTitle">&nbsp;</h2>
 <ul class="toolBar">
 	<li>
-		<div class="buttonActive"><div class="buttonContent"><button type="button">草稿</button></div></div>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0" action="wms/form/iosave">草稿</button></div></div>
 	</li>
 	<li>
-		<div class="buttonActive"><div class="buttonContent"><button type="button">过账</button></div></div>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0" action="wms/form/iosave">过账</button></div></div>
 	</li>
 </ul>
 </@layout>

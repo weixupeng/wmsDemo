@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.ChristStringUtil;
+import util.ModelUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.jfinal.kit.JsonKit;
 import com.koomii.base.BaseController;
 import com.koomii.wms.common.ModelConfigWms;
 import com.koomii.wms.model.Customer;
+import com.koomii.wms.model.Form;
+import com.koomii.wms.model.FormDetail;
 import com.koomii.wms.model.Material;
 import com.koomii.wms.model.Storage;
 
@@ -38,4 +44,15 @@ public class FormController extends BaseController {
 		renderJson(mlist);
 	}
 	
+	public void iosave(){
+		//保存抬头
+		Form form = getModel(Form.class,"form");
+		ModelUtils.fillForSave(form);
+		form.save();
+		//保存明细
+		String detailListStr = getPara("detailList");
+		JSONArray djArray = JSON.parseArray(detailListStr);
+		
+		renderJson("suscess");
+	}
 }
