@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-13 00:47:59
+Date: 2013-12-14 01:21:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -207,7 +207,7 @@ INSERT INTO `sys_userinfo` VALUES ('1', '2011-11-09 15:24:27', '2013-12-04 23:41
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_customer`;
 CREATE TABLE `wms_customer` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -216,14 +216,13 @@ CREATE TABLE `wms_customer` (
 -- ----------------------------
 -- Records of wms_customer
 -- ----------------------------
-INSERT INTO `wms_customer` VALUES ('1', '北京可口', '0');
 
 -- ----------------------------
 -- Table structure for `wms_employe`
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_employe`;
 CREATE TABLE `wms_employe` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -237,7 +236,7 @@ CREATE TABLE `wms_employe` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_flow`;
 CREATE TABLE `wms_flow` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `formId` varchar(32) NOT NULL,
   `inStorage` varchar(32) DEFAULT NULL,
@@ -261,7 +260,7 @@ CREATE TABLE `wms_flow` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_form`;
 CREATE TABLE `wms_form` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `createDate` datetime NOT NULL,
   `worker` varchar(32) NOT NULL,
@@ -284,7 +283,7 @@ CREATE TABLE `wms_form` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_form_detail`;
 CREATE TABLE `wms_form_detail` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `formId` varchar(32) NOT NULL,
   `materialId` varchar(32) NOT NULL,
   `materialName` varchar(32) DEFAULT NULL,
@@ -301,9 +300,9 @@ CREATE TABLE `wms_form_detail` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_inventory`;
 CREATE TABLE `wms_inventory` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `storageId` varchar(32) NOT NULL,
-  `materialId` char(10) NOT NULL,
+  `materialId` varchar(32) NOT NULL,
   `quantity` double NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -317,7 +316,7 @@ CREATE TABLE `wms_inventory` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_inventory_bin`;
 CREATE TABLE `wms_inventory_bin` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `storageId` varchar(32) NOT NULL,
   `storageBinId` varchar(32) NOT NULL,
   `storageBinCode` varchar(32) NOT NULL,
@@ -335,7 +334,7 @@ CREATE TABLE `wms_inventory_bin` (
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_material`;
 CREATE TABLE `wms_material` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `price` double(32,2) DEFAULT NULL,
   `tag` varchar(255) DEFAULT NULL,
@@ -345,7 +344,6 @@ CREATE TABLE `wms_material` (
 -- ----------------------------
 -- Records of wms_material
 -- ----------------------------
-INSERT INTO `wms_material` VALUES ('1', '1', '1.00', ';1,;1,;1.00,');
 
 -- ----------------------------
 -- Table structure for `wms_storage`
@@ -360,14 +358,13 @@ CREATE TABLE `wms_storage` (
 -- ----------------------------
 -- Records of wms_storage
 -- ----------------------------
-INSERT INTO `wms_storage` VALUES ('1', '1');
 
 -- ----------------------------
 -- Table structure for `wms_storage_bin`
 -- ----------------------------
 DROP TABLE IF EXISTS `wms_storage_bin`;
 CREATE TABLE `wms_storage_bin` (
-  `id` varchar(32) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `binCode` varchar(32) NOT NULL,
   `storeId` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
