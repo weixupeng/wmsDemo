@@ -35,9 +35,65 @@ public class FormController extends BaseController {
 	 */
 	public void io() {
 		setAttr("storageList", Storage.dao.find("select * from "+TABLE_Storage));
-		setAttr("customerList", Customer.dao.find("select * from "+TABLE_Customer));
+		setAttr("customerList", Customer.dao.find("select * from "+TABLE_Customer+" where type=0 or type=3"));
 		setAttr("employeList", Employe.dao.find("select * from "+TABLE_Employe));
 		render("../form_io.html");
+	}
+	@ Before(Tx.class)
+	public void iosave(){
+		Form form = getModel(Form.class,"form");
+		List<FormDetail> detailList = new ArrayList<FormDetail>();
+		saveFormAndDetails(form,detailList);
+		//增加库存
+		Inventory.dao.increase(form, detailList);
+		setAttr("type",form.getInt("type"));
+		setAttr("message","入库操作成功！单据号："+form.getLong("id"));
+		render("../form_result.html");
+	}
+	private void saveFormAndDetails(Form form,List<FormDetail> detailList){
+		//保存抬头
+		form.set("createDate", new Date());
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession(true);
+		Userinfo loginUser = (Userinfo) session.getAttribute("loginUser");
+		form.set("operator", loginUser.getStr("username"));
+		form.save();
+		//保存明细
+		String detailListStr = getPara("detailList");
+		JSONArray djArray = JSON.parseArray(detailListStr);
+		for(int i=0;i<djArray.size();i++){
+			JSONObject jo = djArray.getJSONObject(i);
+			FormDetail d = new FormDetail();
+			d.set("materialId", jo.getLong("materialId"));
+			d.set("materialName", jo.getString("materialName"));
+			d.set("quantity", jo.getDouble("quantity"));
+			d.set("storageBinId", jo.getLong("storageBinId"));
+			d.set("storageBinCode", jo.getString("storageBinCode"));
+			d.set("formId", form.getLong("id"));
+			d.save();
+			detailList.add(d);
+		}
+	}
+	@ Before(Tx.class)
+	public void oosave(){
+		Form form = getModel(Form.class,"form");
+		List<FormDetail> detailList = new ArrayList<FormDetail>();
+		saveFormAndDetails(form,detailList);
+		//增加库存
+		Inventory.dao.decrease(form, detailList);
+		setAttr("type",form.getInt("type"));
+		setAttr("message","出库操作成功！单据号："+form.getLong("id"));
+		render("../form_result.html");
+	}
+	
+	/**
+	 * 出库单
+	 */
+	public void oo() {
+		setAttr("storageList", Storage.dao.find("select * from "+TABLE_Storage));
+		setAttr("customerList", Customer.dao.find("select * from "+TABLE_Customer+" where type=1 or type=3"));
+		setAttr("employeList", Employe.dao.find("select * from "+TABLE_Employe));
+		render("../form_oo.html");
 	}
 	
 	/**
@@ -70,35 +126,4 @@ public class FormController extends BaseController {
 		renderJson(storageBinLlist);
 	}
 	
-	@ Before(Tx.class)
-	public void iosave(){
-		//保存抬头
-		Form form = getModel(Form.class,"form");
-		form.set("createDate", new Date());
-		Subject subject = SecurityUtils.getSubject();
-		Session session = subject.getSession(true);
-		Userinfo loginUser = (Userinfo) session.getAttribute("loginUser");
-		form.set("operator", loginUser.getStr("username"));
-		form.save();
-		//保存明细
-		List<FormDetail> detailList = new ArrayList<FormDetail>();
-		String detailListStr = getPara("detailList");
-		JSONArray djArray = JSON.parseArray(detailListStr);
-		for(int i=0;i<djArray.size();i++){
-			JSONObject jo = djArray.getJSONObject(i);
-			FormDetail d = new FormDetail();
-			d.set("materialId", jo.getLong("materialId"));
-			d.set("materialName", jo.getString("materialName"));
-			d.set("quantity", jo.getDouble("quantity"));
-			d.set("storageBinId", jo.getLong("storageBinId"));
-			d.set("storageBinCode", jo.getString("storageBinCode"));
-			d.set("formId", form.getLong("id"));
-			d.save();
-			detailList.add(d);
-		}
-		//增加库存
-		Inventory.dao.add(form, detailList);
-		setAttr("message","入库操作成功！单据号："+form.getLong("id"));
-		render("../form_io_result.html");
-	}
 }

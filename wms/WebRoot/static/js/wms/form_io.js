@@ -29,11 +29,21 @@ function materialSearch(obj){
  */
 var storageBinTpl = $('#storageBinTpl').html();
 function storageBinSearch(obj){
-	var storeId = $("[name='form.inStorage']").val();
+	var type = $("#type").val();
+	var storeId = "";
+	var msg = "请选择入库仓库!";
+	if(type == 0){
+		storeId = $("[name='form.inStorage']").val();
+		msg = "请选择入库仓库!";
+	}else if(type == 1){
+		storeId = $("[name='form.outStorage']").val();
+		msg = "请选择出库仓库!";
+	}
 	if(!storeId){
-		alert("请选择入库仓库!");
+		alert(msg);
 		return;
 	}
+	
 	if(!$("#binCode").val()){
 		alert("请输入仓位编码!");
 		return;
@@ -121,10 +131,19 @@ function del(obj){
 	$("#detailTplWrap").html(html);
 }
 function saveForm(obj){
-	if(!$("[name='form.inStorage']").val()){
-		alert("请选择入库仓库！");
-		return;
+	var type = $("#type").val();
+	if(type == 0){
+		if(!$("[name='form.inStorage']").val()){
+			alert("请选择入库仓库！");
+			return;
+		}
+	}else if(type == 1){
+		if(!$("[name='form.outStorage']").val()){
+			alert("请选择出库仓库！");
+			return;
+		}
 	}
+	
 	if(!$("[name='form.customer']").val()){
 		alert("请选择供应商！");
 		return;
