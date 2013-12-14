@@ -3,9 +3,9 @@
 	<form method="post" action="wms/customer/<#if (customer.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
 		<input type="hidden" id="id" name="id"  value="${(customer.id)!}">
 		<div class="pageFormContent" layoutH="56">
-			<h2 class="contentTitle"><#if (customer.id)??>编辑客户资料<#else>创建新客户资料</#if></h2>
+			<h2 class="contentTitle"><#if (customer.id)??>编辑资料<#else>创建资料</#if></h2>
 			<dl> 
-				<dt>客户供应商号：</dt>
+				<dt>编码：</dt>
 				<dd>
 					<input type="text" name="customer.id"   value="${(customer.id)!}" oldValue="${(customer.id)!}"
 						class="required" remote="wms/customer/checkIsNotExist?id=${(customer.id)!}"
@@ -13,12 +13,12 @@
 			</dl>
 			
 			<dl>
-				<dt>客户公司名：</dt>
+				<dt>名称：</dt>
 				<dd><input type="text" name="customer.name"  value="${(customer.name)!}"
 					class="required" remote="wms/customer/checkNameIsNotExist?id=${(customer.id)!}"></dd>
 			</dl>
 			<dl>
-				<dt>供应商类型：</dt>
+				<dt>类型：</dt>
 				<dd><input type="text" name="customer.type"  value="${(customer.type)!}"
 					class="required" remote="wms/customer/checkNameIsNotExist?id=${(customer.id)!}"></dd>
 			</dl>
