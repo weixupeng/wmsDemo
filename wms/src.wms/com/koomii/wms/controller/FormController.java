@@ -1,6 +1,5 @@
 package com.koomii.wms.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,14 +9,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import util.ChristStringUtil;
-import util.CommonUtil;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jfinal.aop.Before;
-import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.koomii.base.BaseController;
 import com.koomii.sys.model.Userinfo;
