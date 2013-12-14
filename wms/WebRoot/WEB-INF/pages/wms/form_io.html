@@ -40,14 +40,38 @@
 		</dl>
 		<dl>
 			<dt>作业人：</dt>
-			<dd><input type="text" name="form.worker" value="" class="required textInput"></dd>
+			<dd>
+				<select name="form.worker" class="required combox">
+					<option value="">---请选择---</option>
+					<#list employeList as s>
+					<option value="${(s.id)!}">${(s.name)!}</option>
+					</#list>
+				</select>
+			</dd>
 		</dl>
 	</fieldset>
 	</form>
 	<fieldset>
 		<legend>单据明细</legend>
-		<dl style="width:450px;">
-			<dt>货物：</dt>
+		<dl style="width:330px;">
+			<dt style="width:40px;">仓位：</dt>
+			<dd style="width:280px;">
+				<input type="text" id="binCode" name="binCode" class="left required textInput">
+				<div class="left buttonActive"><div class="buttonContent"><button type="button" id="StorageBinBtn" onclick="storageBinSearch(this);" action="/wms/form/searchStorageBin">查询</button></div></div>
+				<select id="storageBins" name="storageBins" class="left combox hidden" onchange="selectStorageBin(this);">
+					<option value="">---请选择---</option>
+				</select>
+				<span class="clear"></span>
+			</dd>
+		</dl>
+<script id="storageBinTpl" type="text/template">
+	<option value="">---请选择---</option>
+	{@each _ as o,index}
+	<option value="@{o.id}###@{o.binCode}">@{o.binCode}</option>
+	{@/each}
+</script>
+		<dl style="width:420px;">
+			<dt style="width:40px;">货物：</dt>
 			<dd style="width:350px;">
 				<input type="text" id="materialId" name="tag" class="left required textInput">
 				<div class="left buttonActive"><div class="buttonContent"><button type="button" id="materialSearchBtn" onclick="materialSearch(this);" action="/wms/form/searchMaterial">查询</button></div></div>
@@ -64,7 +88,7 @@
 	{@/each}
 </script>
 		<dl>
-			<dt>数量：</dt>
+			<dt style="width:40px;">数量：</dt>
 			<dd>
 				<input type="text" id="quantity" name="formDetail.quantity" class="required textInput">
 				<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="add();">添加</button></div></div>
@@ -75,7 +99,7 @@
 	{@each _ as o,index}
 	<tr>
 	  <td>@{++index}</td>
-	  <td>@{o.id}</td>
+	  <td>@{o.storageBinCode}</td>
 	  <td>@{o.materialId}【@{o.materialName}】</td>
 	  <td>@{o.quantity}</td>
 	<td><a href="javascript:void(0);" onclick="del(this);" sid="@{o.id}">删除</a></td>
@@ -86,7 +110,7 @@
 		<thead>
 			<tr>
 				<th style="width:80px;">行号</th>
-				<th style="width:80px;">项目号</th>
+				<th style="width:80px;">仓位</th>
 				<th style="width:180px;">货物</th>
 				<th style="width:100px;">数量</th>
 				<th style="width:200px;">操作</th>
@@ -97,11 +121,11 @@
 </div>
 <h2 class="contentTitle">&nbsp;</h2>
 <ul class="toolBar">
-	<li>
+	<li style="display:none;">
 		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0">草稿</button></div></div>
 	</li>
 	<li>
-		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="1">过账</button></div></div>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="1">入库</button></div></div>
 	</li>
 </ul>
 <script src="static/js/wms/form_io.js" type="text/javascript"></script>

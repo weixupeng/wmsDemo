@@ -8,6 +8,7 @@ import com.jfinal.plugin.activerecord.Model;
  *
  */
 public class Customer extends Model<Customer> {
+	private static final long serialVersionUID = 334666917570886287L;
 	public static Customer dao = new Customer();
 	
 }

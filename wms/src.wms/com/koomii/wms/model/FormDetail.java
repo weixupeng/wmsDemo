@@ -8,6 +8,7 @@ import com.jfinal.plugin.activerecord.Model;
  *
  */
 public class FormDetail extends Model<FormDetail> {
+	private static final long serialVersionUID = -1808531637182331057L;
 	public static FormDetail dao = new FormDetail();
 	
 }

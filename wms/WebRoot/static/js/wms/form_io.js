@@ -4,13 +4,13 @@ var detailList = [];//单据明细列表
  * 根据tag查询货物
  * @param obj materialBtn
  */
+var materialTpl = $('#materialTpl').html();
 function materialSearch(obj){
 	if($("#materialId").val() == ''){
 		alert("请输入货物编号或名称!");
 		return;
 	}
 	var btn = $(obj);
-	var tpl = $('#materialTpl').html();
 	var params = $("#materialId").serializeArray();
 	$.ajax({
 		type: 'POST',
@@ -18,8 +18,37 @@ function materialSearch(obj){
 		data:params,
 		dataType:"json",
 		success: function(data){
-			var html = juicer(tpl,data);
+			var html = juicer(materialTpl,data);
 			$("#materials").html(html).show();
+		}
+	});
+}
+/**
+ * 根据storeId查询仓位
+ * @param obj materialBtn
+ */
+var storageBinTpl = $('#storageBinTpl').html();
+function storageBinSearch(obj){
+	var storeId = $("[name='form.inStorage']").val();
+	if(!storeId){
+		alert("请选择入库仓库!");
+		return;
+	}
+	if(!$("#binCode").val()){
+		alert("请输入仓位编码!");
+		return;
+	}
+	var btn = $(obj);
+	var params = $("#binCode").serialize();
+	params = params+"&storeId="+storeId;
+	$.ajax({
+		type: 'POST',
+		url:btn.attr("action"),
+		data:params,
+		dataType:"json",
+		success: function(data){
+			var html = juicer(storageBinTpl,data);
+			$("#storageBins").html(html).show();
 		}
 	});
 }
@@ -34,13 +63,34 @@ function selectMaterial(obj){
 		var vals = v.split("###");
 		detail.materialId = vals[0];
 		detail.materialName = vals[1];
+	}else{
+		detail.materialId = null;
+	}
+}
+/**
+ * 选择仓位
+ * @param obj
+ */
+function selectStorageBin(obj){
+	var sel = $(obj);
+	var v = sel.val();
+	if(v){
+		var vals = v.split("###");
+		detail.storageBinId = vals[0];
+		detail.storageBinCode = vals[1];
+	}else{
+		detail.storageBinId = null;
 	}
 }
 
 var id = 1;//明细项目号
-var tpl = $('#detailTpl').html();//明细模版
+var detailTpl = $('#detailTpl').html();//明细模版
 function add(){
-	if(!$("#materials").val()){
+	if(!detail.storageBinId){
+		alert("请选择仓位！");
+		return;
+	}
+	if(!detail.materialId){
 		alert("请选择货物！");
 		return;
 	}
@@ -55,8 +105,9 @@ function add(){
 	detailList.push(detail);
 	detail = {};
 	q.val("");
-	$("#materials").html("").hide();
-	var html = juicer(tpl,detailList);
+	$("#storageBins").html("").hide();//隐藏仓位选择
+	$("#materials").html("").hide();//隐藏货物选择
+	var html = juicer(detailTpl,detailList);
 	$("#detailTplWrap").html(html);
 }
 function del(obj){
