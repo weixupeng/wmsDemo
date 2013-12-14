@@ -22,3 +22,12 @@ ul li{
 	float:left;
 	margin-left:20px;
 }
+.pageFormContent dl{
+	width: 260px;
+}
+.pageFormContent dt {
+	width:70px;
+}
+.pageFormContent dd {
+	width:180px;
+}

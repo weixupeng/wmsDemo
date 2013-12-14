@@ -2,6 +2,7 @@ package com.koomii.base;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class BaseController extends Controller {
 	 * @param checkValue
 	 * @return true:不存在，false：存在
 	 */
-	public boolean checkIsNotExist(String tableName,String colum,String checkValue){
+	public boolean checkIsNotExist(String tableName,String colum,Serializable checkValue){
 		StringBuffer sql = new StringBuffer("select ").append(colum).append(" from ").append(tableName).
 				append(" where ").append(colum).append(" = ? ");
 		

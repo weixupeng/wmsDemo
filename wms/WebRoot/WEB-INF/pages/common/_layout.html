@@ -14,9 +14,12 @@
 <script src="static/js/jquery.validate.js" type="text/javascript"></script>
 <script src="static/js/jquery.validate.methods.js" type="text/javascript"></script>
 <script src="static/js/jquery.validate.cn.js" type="text/javascript"></script>
+<script src="static/js/bird.core.js" type="text/javascript"></script>
+<script src="static/js/bird.util.date.js" type="text/javascript"></script>
+<script src="static/js/bird.datepicker.js" type="text/javascript"></script>
 <script src="static/js/juicer.js" type="text/javascript"></script>
 <script type="text/javascript">juicer.set({'tag::interpolateOpen': '@{'});</script>
-<script src="static/js/external.js" type="text/javascript"></script>
+<script src="static/js/wms/external.js" type="text/javascript"></script>
 </head>
 <body style="background:#FFF">
 <style>
@@ -27,6 +30,26 @@
 </style>
 	<#nested>
 	<div style="height:100px;">&nbsp;</div>
+<script type="text/javascript">
+Bird.init("static/js/bird.frag.xml", {
+    debug:false,    // 调试模式 【true|false】
+    homePath:''
+});
+$.setRegional("datepicker", {
+	dayNames: ['日', '一', '二', '三', '四', '五', '六'],
+	monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+});
+if ($.fn.datepicker){
+	$('input.date').each(function(){
+		var $this = $(this);
+		var opts = {};
+		if ($this.attr("format")) opts.pattern = $this.attr("format");
+		if ($this.attr("yearstart")) opts.yearstart = $this.attr("yearstart");
+		if ($this.attr("yearend")) opts.yearend = $this.attr("yearend");
+		$this.datepicker(opts);
+	});
+}
+</script>
 </body>
 </html>
 </#macro>

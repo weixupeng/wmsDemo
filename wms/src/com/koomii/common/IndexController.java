@@ -100,6 +100,10 @@ public class IndexController extends BaseController {
 	}
 	
 	public void main(){
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession(true);
+		Userinfo loginUser = (Userinfo) session.getAttribute("loginUser");
+		setAttr("loginUser", loginUser);
 		render("common/main.html");
 	}
 	public void sidebar(){
