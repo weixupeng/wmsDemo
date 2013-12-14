@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost13306
 Source Server Version : 50519
 Source Host           : localhost:13306
 Source Database       : wms
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-14 01:34:54
+Date: 2013-12-14 12:00:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,11 +211,12 @@ CREATE TABLE `wms_customer` (
   `name` varchar(32) NOT NULL,
   `type` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_customer
 -- ----------------------------
+INSERT INTO `wms_customer` VALUES ('1', '可口可乐', '0');
 
 -- ----------------------------
 -- Table structure for `wms_employe`
@@ -225,11 +226,12 @@ CREATE TABLE `wms_employe` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_employe
 -- ----------------------------
+INSERT INTO `wms_employe` VALUES ('1', '王三');
 
 -- ----------------------------
 -- Table structure for `wms_flow`
@@ -238,22 +240,24 @@ DROP TABLE IF EXISTS `wms_flow`;
 CREATE TABLE `wms_flow` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
-  `formId` varchar(32) NOT NULL,
+  `formId` bigint(20) NOT NULL,
   `inStorage` varchar(32) DEFAULT NULL,
   `stStorage` varchar(32) DEFAULT NULL,
   `outStorage` varchar(32) DEFAULT NULL,
-  `materialId` varchar(32) NOT NULL,
+  `materialId` bigint(20) NOT NULL,
   `materialName` varchar(32) DEFAULT NULL,
   `quantity` double NOT NULL,
   `createDate` datetime NOT NULL,
-  `worker` varchar(32) DEFAULT NULL,
+  `worker` bigint(20) DEFAULT NULL,
   `operator` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100007 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_flow
 -- ----------------------------
+INSERT INTO `wms_flow` VALUES ('100005', '0', '1010', '1', null, null, '12', '可口可乐250ml', '1', '2013-12-14 11:54:50', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100006', '0', '1010', '1', null, null, '12', '可口可乐250ml', '2', '2013-12-14 11:54:50', '1', 'admin');
 
 -- ----------------------------
 -- Table structure for `wms_form`
@@ -263,20 +267,21 @@ CREATE TABLE `wms_form` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `createDate` datetime NOT NULL,
-  `worker` varchar(32) NOT NULL,
+  `worker` bigint(20) NOT NULL,
   `optime` datetime DEFAULT NULL,
   `inStorage` varchar(32) DEFAULT NULL,
   `outStorage` varchar(32) DEFAULT NULL,
   `stStorage` varchar(32) DEFAULT NULL,
   `customer` varchar(32) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `oprator` varchar(32) DEFAULT NULL,
+  `operator` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1011 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_form
 -- ----------------------------
+INSERT INTO `wms_form` VALUES ('1010', '0', '2013-12-14 11:54:50', '1', '2013-12-14 11:54:44', '1', null, null, '1', '1', 'admin');
 
 -- ----------------------------
 -- Table structure for `wms_form_detail`
@@ -284,16 +289,20 @@ CREATE TABLE `wms_form` (
 DROP TABLE IF EXISTS `wms_form_detail`;
 CREATE TABLE `wms_form_detail` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `formId` varchar(32) NOT NULL,
-  `materialId` varchar(32) NOT NULL,
+  `formId` bigint(20) NOT NULL,
+  `materialId` bigint(20) NOT NULL,
   `materialName` varchar(32) DEFAULT NULL,
   `quantity` double NOT NULL,
+  `storageBinId` bigint(20) DEFAULT NULL,
+  `storageBinCode` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_form_detail
 -- ----------------------------
+INSERT INTO `wms_form_detail` VALUES ('1', '1010', '12', '可口可乐250ml', '1', '1', 'A1');
+INSERT INTO `wms_form_detail` VALUES ('2', '1010', '12', '可口可乐250ml', '2', '1', 'A1');
 
 -- ----------------------------
 -- Table structure for `wms_inventory`
@@ -302,14 +311,15 @@ DROP TABLE IF EXISTS `wms_inventory`;
 CREATE TABLE `wms_inventory` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `storageId` varchar(32) NOT NULL,
-  `materialId` varchar(32) NOT NULL,
+  `materialId` bigint(20) NOT NULL,
   `quantity` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_inventory
 -- ----------------------------
+INSERT INTO `wms_inventory` VALUES ('4', '1', '12', '3');
 
 -- ----------------------------
 -- Table structure for `wms_inventory_bin`
@@ -318,16 +328,17 @@ DROP TABLE IF EXISTS `wms_inventory_bin`;
 CREATE TABLE `wms_inventory_bin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `storageId` varchar(32) NOT NULL,
-  `storageBinId` varchar(32) NOT NULL,
+  `storageBinId` bigint(20) NOT NULL,
   `storageBinCode` varchar(32) NOT NULL,
-  `materialId` varchar(32) NOT NULL,
+  `materialId` bigint(20) NOT NULL,
   `quantity` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_inventory_bin
 -- ----------------------------
+INSERT INTO `wms_inventory_bin` VALUES ('1', '1', '1', 'A1', '12', '3');
 
 -- ----------------------------
 -- Table structure for `wms_material`
@@ -339,11 +350,12 @@ CREATE TABLE `wms_material` (
   `price` double(32,2) DEFAULT NULL,
   `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_material
 -- ----------------------------
+INSERT INTO `wms_material` VALUES ('12', '可口可乐250ml', '1.00', ';12,;可口可乐250ml,');
 
 -- ----------------------------
 -- Table structure for `wms_storage`
@@ -358,6 +370,7 @@ CREATE TABLE `wms_storage` (
 -- ----------------------------
 -- Records of wms_storage
 -- ----------------------------
+INSERT INTO `wms_storage` VALUES ('1', '北京仓');
 
 -- ----------------------------
 -- Table structure for `wms_storage_bin`
@@ -368,8 +381,9 @@ CREATE TABLE `wms_storage_bin` (
   `binCode` varchar(32) NOT NULL,
   `storeId` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wms_storage_bin
 -- ----------------------------
+INSERT INTO `wms_storage_bin` VALUES ('1', 'A1', '1');
