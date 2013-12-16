@@ -3,11 +3,12 @@ package com.koomii.wms.common;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.koomii.wms.controller.CustomerController;
+import com.koomii.wms.controller.EmployeController;
 import com.koomii.wms.controller.FormController;
+import com.koomii.wms.controller.InventoryController;
 import com.koomii.wms.controller.MaterialController;
 import com.koomii.wms.controller.StorageBinController;
 import com.koomii.wms.controller.StorageController;
-import com.koomii.wms.controller.EmployeController;;
 
 public class RouteConfigWms {
 	
@@ -18,6 +19,7 @@ public class RouteConfigWms {
 		me.add("/wms/customer", CustomerController.class);
 		me.add("/wms/employe", EmployeController.class);
 		me.add("/wms/storage_bin", StorageBinController.class);
+		me.add("/wms/inventory", InventoryController.class);
 	}
 	
 	/**
