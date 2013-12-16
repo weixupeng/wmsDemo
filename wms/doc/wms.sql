@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2013-12-14 15:29:53
+Date: 2013-12-16 15:01:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,11 +211,13 @@ CREATE TABLE `wms_customer` (
   `name` varchar(32) NOT NULL COMMENT '名称',
   `type` int(11) NOT NULL COMMENT '类型（0供应商1客户）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商客户';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='供应商客户';
 
 -- ----------------------------
 -- Records of wms_customer
 -- ----------------------------
+INSERT INTO `wms_customer` VALUES ('1', '北京可口', '0');
+INSERT INTO `wms_customer` VALUES ('2', '家乐福', '1');
 
 -- ----------------------------
 -- Table structure for `wms_employe`
@@ -225,11 +227,12 @@ CREATE TABLE `wms_employe` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编码',
   `name` varchar(32) DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='员工';
 
 -- ----------------------------
 -- Records of wms_employe
 -- ----------------------------
+INSERT INTO `wms_employe` VALUES ('1', '王五');
 
 -- ----------------------------
 -- Table structure for `wms_flow`
@@ -249,11 +252,22 @@ CREATE TABLE `wms_flow` (
   `worker` bigint(20) DEFAULT NULL COMMENT '作业人',
   `operator` varchar(32) DEFAULT NULL COMMENT '操作人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100000 DEFAULT CHARSET=utf8 COMMENT='货物流水';
+) ENGINE=InnoDB AUTO_INCREMENT=100017 DEFAULT CHARSET=utf8 COMMENT='货物流水';
 
 -- ----------------------------
 -- Records of wms_flow
 -- ----------------------------
+INSERT INTO `wms_flow` VALUES ('100006', '0', '1008', '1', null, null, '1', '可乐', '11', '2013-12-16 13:56:44', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100007', '1', '1009', null, null, '1', '1', '可乐', '-1', '2013-12-16 13:58:11', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100008', '1', '1010', null, null, '1', '1', '可乐', '-1', '2013-12-16 14:02:15', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100009', '0', '1011', '2', null, null, '2', '雪碧', '21', '2013-12-16 14:05:49', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100010', '1', '1012', null, null, '2', '2', '雪碧', '-6', '2013-12-16 14:06:13', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100011', '2', '1022', '', null, '1', '1', '可乐', '-5', '2013-12-16 14:48:41', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100012', '2', '1022', '2', null, null, '1', '可乐', '5', '2013-12-16 14:48:41', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100013', '2', '1023', null, null, '1', '1', '可乐', '-1', '2013-12-16 14:59:41', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100014', '2', '1023', '2', null, null, '1', '可乐', '1', '2013-12-16 14:59:41', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100015', '2', '1023', null, null, '1', '1', '可乐', '-1', '2013-12-16 14:59:41', '1', 'admin');
+INSERT INTO `wms_flow` VALUES ('100016', '2', '1023', '2', null, null, '1', '可乐', '1', '2013-12-16 14:59:41', '1', 'admin');
 
 -- ----------------------------
 -- Table structure for `wms_form`
@@ -272,11 +286,18 @@ CREATE TABLE `wms_form` (
   `status` int(11) DEFAULT NULL COMMENT '状态（0草稿1已过账）',
   `operator` varchar(32) DEFAULT NULL COMMENT '操作人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='单据';
+) ENGINE=InnoDB AUTO_INCREMENT=1024 DEFAULT CHARSET=utf8 COMMENT='单据';
 
 -- ----------------------------
 -- Records of wms_form
 -- ----------------------------
+INSERT INTO `wms_form` VALUES ('1008', '0', '2013-12-16 13:56:44', '1', '2013-12-16 13:56:36', '1', null, null, '1', '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1009', '1', '2013-12-16 13:58:11', '1', '2013-12-16 13:58:00', null, '1', null, '2', '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1010', '1', '2013-12-16 14:02:15', '1', '2013-12-16 14:01:59', null, '1', null, '2', '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1011', '0', '2013-12-16 14:05:49', '1', '2013-12-16 14:05:33', '2', null, null, '1', '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1012', '1', '2013-12-16 14:06:13', '1', '2013-12-16 14:05:58', null, '2', null, '2', '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1022', '2', '2013-12-16 14:48:41', '1', '2013-12-16 14:48:31', '2', '1', null, null, '1', 'admin');
+INSERT INTO `wms_form` VALUES ('1023', '2', '2013-12-16 14:59:41', '1', '2013-12-16 14:59:30', '2', '1', null, null, '1', 'admin');
 
 -- ----------------------------
 -- Table structure for `wms_form_detail`
@@ -288,14 +309,23 @@ CREATE TABLE `wms_form_detail` (
   `materialId` bigint(20) NOT NULL COMMENT '货物编号',
   `materialName` varchar(32) DEFAULT NULL COMMENT '货物名称',
   `quantity` double NOT NULL COMMENT '数量',
-  `storageBinId` bigint(20) DEFAULT NULL COMMENT '仓位Id',
-  `storageBinCode` varchar(32) DEFAULT NULL COMMENT '仓位编号',
+  `inStorageBinId` bigint(20) DEFAULT NULL COMMENT '仓位Id',
+  `inStorageBinCode` varchar(32) DEFAULT NULL COMMENT '仓位编号',
+  `outStorageBinId` bigint(20) DEFAULT NULL,
+  `outStorageBinCode` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单据明细';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='单据明细';
 
 -- ----------------------------
 -- Records of wms_form_detail
 -- ----------------------------
+INSERT INTO `wms_form_detail` VALUES ('14', '1008', '1', '可乐', '11', '1', 'BJ-1-1', null, null);
+INSERT INTO `wms_form_detail` VALUES ('15', '1009', '1', '可乐', '1', null, null, '1', 'BJ-1-1');
+INSERT INTO `wms_form_detail` VALUES ('16', '1010', '1', '可乐', '1', null, null, '1', 'BJ-1-1');
+INSERT INTO `wms_form_detail` VALUES ('17', '1011', '2', '雪碧', '21', '2', 'SH-1-1', null, null);
+INSERT INTO `wms_form_detail` VALUES ('18', '1012', '2', '雪碧', '6', null, null, '2', 'SH-1-1');
+INSERT INTO `wms_form_detail` VALUES ('28', '1022', '1', '可乐', '5', '2', 'SH-1-1', '1', 'BJ-1-1');
+INSERT INTO `wms_form_detail` VALUES ('29', '1023', '1', '可乐', '1', '2', 'SH-1-1', '1', 'BJ-1-1');
 
 -- ----------------------------
 -- Table structure for `wms_inventory`
@@ -307,11 +337,14 @@ CREATE TABLE `wms_inventory` (
   `materialId` bigint(20) NOT NULL COMMENT '货号',
   `quantity` double NOT NULL COMMENT '库存数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='仓库库存';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='仓库库存';
 
 -- ----------------------------
 -- Records of wms_inventory
 -- ----------------------------
+INSERT INTO `wms_inventory` VALUES ('2', '1', '1', '3');
+INSERT INTO `wms_inventory` VALUES ('3', '2', '2', '15');
+INSERT INTO `wms_inventory` VALUES ('10', '2', '1', '6');
 
 -- ----------------------------
 -- Table structure for `wms_inventory_bin`
@@ -325,11 +358,14 @@ CREATE TABLE `wms_inventory_bin` (
   `materialId` bigint(20) NOT NULL COMMENT '货物编号',
   `quantity` double NOT NULL COMMENT '库存数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='仓位库存';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='仓位库存';
 
 -- ----------------------------
 -- Records of wms_inventory_bin
 -- ----------------------------
+INSERT INTO `wms_inventory_bin` VALUES ('3', '1', '1', 'BJ-1-1', '1', '3');
+INSERT INTO `wms_inventory_bin` VALUES ('5', '2', '2', 'SH-1-1', '2', '15');
+INSERT INTO `wms_inventory_bin` VALUES ('6', '2', '2', 'SH-1-1', '1', '6');
 
 -- ----------------------------
 -- Table structure for `wms_material`
@@ -341,11 +377,13 @@ CREATE TABLE `wms_material` (
   `price` double(32,2) DEFAULT NULL COMMENT '价格',
   `tag` varchar(255) DEFAULT NULL COMMENT '查询标志',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='货物';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='货物';
 
 -- ----------------------------
 -- Records of wms_material
 -- ----------------------------
+INSERT INTO `wms_material` VALUES ('1', '可乐', '1.00', ';1,;可乐,');
+INSERT INTO `wms_material` VALUES ('2', '雪碧', '1.00', ';2,;雪碧,');
 
 -- ----------------------------
 -- Table structure for `wms_storage`
@@ -360,6 +398,8 @@ CREATE TABLE `wms_storage` (
 -- ----------------------------
 -- Records of wms_storage
 -- ----------------------------
+INSERT INTO `wms_storage` VALUES ('1', '北京仓');
+INSERT INTO `wms_storage` VALUES ('2', '上海仓');
 
 -- ----------------------------
 -- Table structure for `wms_storage_bin`
@@ -370,8 +410,10 @@ CREATE TABLE `wms_storage_bin` (
   `binCode` varchar(32) NOT NULL COMMENT '仓位号',
   `storeId` varchar(32) NOT NULL COMMENT '所属仓库',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='仓位';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='仓位';
 
 -- ----------------------------
 -- Records of wms_storage_bin
 -- ----------------------------
+INSERT INTO `wms_storage_bin` VALUES ('1', 'BJ-1-1', '1');
+INSERT INTO `wms_storage_bin` VALUES ('2', 'SH-1-1', '2');
