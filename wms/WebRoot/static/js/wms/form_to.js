@@ -28,29 +28,37 @@ function materialSearch(obj){
  * @param obj materialBtn
  */
 var storageBinTpl = $('#storageBinTpl').html();
-function storageBinSearch(obj){
-	var type = $("#type").val();
+/* typ=0转出仓库，type=1转入仓库 */
+function storageBinSearch(obj,type){
 	var storeId = "";
-	var msg = "请选择入库仓库!";
+	var binCode = "";
+	var storeMessage = "请选择仓库!";
+	var binCodeMessage = "请输入仓位编码!";
+	var selectId = "outStorageBins";
 	if(type == 0){
-		storeId = $("[name='form.inStorage']").val();
-		msg = "请选择入库仓库!";
-	}else if(type == 1){
 		storeId = $("[name='form.outStorage']").val();
-		msg = "请选择出库仓库!";
+		storeMessage = "请选择转出仓库!";
+		binCode = $("#outBinCode").val();
+		binCodeMessage = "请输入转出仓位编码!";
+		selectId = "outStorageBins";
+	}else if(type == 1){
+		storeId = $("[name='form.inStorage']").val();
+		storeMessage = "请选择转入仓库!";
+		binCode = $("#inBinCode").val();
+		binCodeMessage = "请输入转入仓位编码!";
+		selectId = "inStorageBins";
 	}
 	if(!storeId){
-		alert(msg);
+		alert(storeMessage);
 		return;
 	}
 	
-	if(!$("#binCode").val()){
-		alert("请输入仓位编码!");
+	if(!binCode){
+		alert(binCodeMessage);
 		return;
 	}
 	var btn = $(obj);
-	var params = $("#binCode").serialize();
-	params = params+"&storeId="+storeId;
+	var params = "binCode="+binCode+"&storeId="+storeId;
 	$.ajax({
 		type: 'POST',
 		url:btn.attr("action"),
@@ -58,7 +66,7 @@ function storageBinSearch(obj){
 		dataType:"json",
 		success: function(data){
 			var html = juicer(storageBinTpl,data);
-			$("#storageBins").html(html).show();
+			$("#"+selectId).html(html).show();
 		}
 	});
 }
@@ -81,23 +89,37 @@ function selectMaterial(obj){
  * 选择仓位
  * @param obj
  */
-function selectStorageBin(obj){
+function selectStorageBin(obj,type){
 	var sel = $(obj);
 	var v = sel.val();
 	if(v){
 		var vals = v.split("###");
-		detail.storageBinId = vals[0];
-		detail.storageBinCode = vals[1];
+		if(type == 0){
+			detail.outStorageBinId = vals[0];
+			detail.outStorageBinCode = vals[1];
+		}else{
+			detail.inStorageBinId = vals[0];
+			detail.inStorageBinCode = vals[1];
+		}
+		
 	}else{
-		detail.storageBinId = null;
+		if(type == 0){//入库
+			detail.outStorageBinId = null;
+		}else if(type == 1){//出库
+			detail.inStorageBinId = null;
+		}
 	}
 }
 
 var id = 1;//明细项目号
 var detailTpl = $('#detailTpl').html();//明细模版
 function add(){
-	if(!detail.storageBinId){
-		alert("请选择仓位！");
+	if(!detail.outStorageBinId){
+		alert("请选择转出仓位！");
+		return;
+	}
+	if(!detail.inStorageBinId){
+		alert("请选择转入仓位！");
 		return;
 	}
 	if(!detail.materialId){
@@ -114,8 +136,9 @@ function add(){
 	}
 	detailList.push(detail);
 	detail = {};
-	q.val("");
-	$("#storageBins").html("").hide();//隐藏仓位选择
+	q.val("");//清空数量
+	$("#inStorageBins").html("").hide();//隐藏转入仓位选择
+	$("#outStorageBins").html("").hide();//隐藏转出仓位选择
 	$("#materials").html("").hide();//隐藏货物选择
 	var html = juicer(detailTpl,detailList);
 	$("#detailTplWrap").html(html);
@@ -127,29 +150,20 @@ function del(obj){
 			detailList.splice(i, 1);
 		}
 	}
-	var html = juicer(tpl,detailList);
+	var html = juicer(detailTpl,detailList);
 	$("#detailTplWrap").html(html);
 }
 function saveForm(obj){
-	var type = $("#type").val();
-	if(type == 0){
-		if(!$("[name='form.inStorage']").val()){
-			alert("请选择入库仓库！");
-			return;
-		}
-	}else if(type == 1){
-		if(!$("[name='form.outStorage']").val()){
-			alert("请选择出库仓库！");
-			return;
-		}
-	}
-	
-	if(!$("[name='form.customer']").val()){
-		alert("请选择供应商！");
+	if(!$("[name='form.outStorage']").val()){
+		alert("请选择出库仓库！");
+		return;
+	}	
+	if(!$("[name='form.inStorage']").val()){
+		alert("请选择入库仓库！");
 		return;
 	}
 	if($("[name='form.optime']").val() == ''){
-		alert("请输入货物入库时间！");
+		alert("请输入货物转储时间！");
 		return;
 	}
 	if($("[name='form.worker']").val() == ''){
@@ -162,7 +176,6 @@ function saveForm(obj){
 		return;
 	}
 	$("#status").val(btn.attr("status"));
-	var params = $("#ioForm").serializeArray();
 	$("#detailList").val($.toJSONString(detailList));
 	$("#ioForm").submit();
 }

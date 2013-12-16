@@ -26,11 +26,11 @@ public class Inventory extends Model<Inventory> {
 			//获取货物在入库仓库的库存
 			Inventory i = this.findFirst("select * from "+TABLE_Inventory+
 					" where storageId=? and materialId=?", 
-					getStoreId(form),
+					form.get("inStorage"),
 					detail.getLong("materialId"));
 			//如果没有货物的库存则新建
 			if(i == null){
-				i = new Inventory().set("storageId", getStoreId(form))
+				i = new Inventory().set("storageId", "inStorage")
 				.set("materialId", detail.getLong("materialId"))
 				.set("quantity", detail.getDouble("quantity"));
 				i.save();
@@ -44,12 +44,12 @@ public class Inventory extends Model<Inventory> {
 			//增加仓位库存
 			InventoryBin ib = InventoryBin.dao.findFirst("select * from "+TABLE_InventoryBin+
 					" where storageBinId=? and materialId=?", 
-					detail.getLong("storageBinId"),
+					detail.getLong("inStorageBinId"),
 					detail.getLong("materialId"));
 			if(ib == null){
-				ib = new InventoryBin().set("storageId", getStoreId(form))
-						.set("storageBinId", detail.getLong("storageBinId"))
-						.set("storageBinCode", detail.getStr("storageBinCode"))
+				ib = new InventoryBin().set("storageId", form.get("inStorage"))
+						.set("storageBinId", detail.getLong("inStorageBinId"))
+						.set("storageBinCode", detail.getStr("inStorageBinCode"))
 						.set("materialId", detail.getLong("materialId"))
 						.set("quantity", detail.getDouble("quantity"));
 				ib.save();
@@ -64,20 +64,6 @@ public class Inventory extends Model<Inventory> {
 			Flow.dao.addFlow(form, detail);
 		}
 	}
-	/**
-	 * 从form中获取当前作业的仓库，根据type不同，获取的字段不同
-	 * @param form
-	 * @return
-	 */
-	public String getStoreId(Form form){
-		int type = form.getInt("type");
-		if(type == 0){
-			return form.getStr("inStorage");
-		}else if(type == 1){
-			return form.getStr("outStorage");
-		}
-		return null;
-	}
 	
 	/**
 	 * 减少库存
@@ -89,11 +75,11 @@ public class Inventory extends Model<Inventory> {
 			//获取货物在入库仓库的库存
 			Inventory i = this.findFirst("select * from "+TABLE_Inventory+
 					" where storageId=? and materialId=?", 
-					getStoreId(form),
+					form.get("outStorage"),
 					detail.getLong("materialId"));
 			//如果没有货物的库存则新建
 			if(i == null){
-				i = new Inventory().set("storageId", getStoreId(form))
+				i = new Inventory().set("storageId", form.get("outStorage"))
 				.set("materialId", detail.getLong("materialId"))
 				.set("quantity", 0d-detail.getDouble("quantity"));
 				i.save();
@@ -107,12 +93,12 @@ public class Inventory extends Model<Inventory> {
 			//减少仓位库存
 			InventoryBin ib = InventoryBin.dao.findFirst("select * from "+TABLE_InventoryBin+
 					" where storageBinId=? and materialId=?", 
-					detail.getLong("storageBinId"),
+					detail.getLong("outStorageBinId"),
 					detail.getLong("materialId"));
 			if(ib == null){
-				ib = new InventoryBin().set("storageId", getStoreId(form))
-						.set("storageBinId", detail.getLong("storageBinId"))
-						.set("storageBinCode", detail.getStr("storageBinCode"))
+				ib = new InventoryBin().set("storageId", form.get("outStorage"))
+						.set("storageBinId", detail.getLong("outStorageBinId"))
+						.set("storageBinCode", detail.getStr("outStorageBinCode"))
 						.set("materialId", detail.getLong("materialId"))
 						.set("quantity", 0d-detail.getDouble("quantity"));
 				ib.save();

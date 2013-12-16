@@ -34,7 +34,8 @@ public class Flow extends Model<Flow> {
 		}else if(type == 3){
 			flow.set("stStorage", form.get("stStorage"));
 			flow.set("quantity", detail.get("quantity"));
-		}else if(type == 2){//移库==上边已经入库了，现在出库
+		}
+		if(type == 2){//移库==上边已经入库了，现在出库
 			Flow outFlow = new Flow();
 			outFlow.set("type", type);
 			outFlow.set("formId", form.get("id"));
