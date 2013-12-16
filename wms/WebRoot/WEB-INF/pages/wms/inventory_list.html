@@ -1,18 +1,33 @@
 <base href="${CONTEXT_PATH}/" />
-<form id="pagerForm" action="wms/customer" onsubmit="return navTabSearch(this)" method="post">
+<form id="pagerForm" action="sys/inventory" onsubmit="return navTabSearch(this)" method="post">
    	<input type="hidden" name="pager.pageNumber" value="${(pager.pageNumber)!}" /><!--【必须】value=1可以写死-->
    	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
 	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
    		也可以在searchForm上设置属性rel=”pagerForm”，js框架会自动把searchForm搜索条件复制到pagerForm中 -->
-</form> 
+	<div class="pageHeader">
+		<div class="searchBar">
+    		<table class="searchContent">
+    			<tr>
+    				<td>
+    					请输入：<input type="text" class="focus highlightText" size="40" name="tag" value="${(tag)!}" alt="用户名、真实名称"/>
+    				</td>
+					
+    				<td><div class="button"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
+    			</tr>
+    		</table>
+    	</div>
+	</div>
+</form>
 <div class="pageContent" style="padding:0px">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" target="dialog"  width="500" height="250"  href="wms/customer/add"><span>新增</span></a></li>
+			<li><a class="add" target="dialog"  width="580" height="430"  href="sys/inventory/add"><span>新增</span></a></li>
 			<li class="line">line</li>
-			<li><a class="edit" href="wms/customer/edit?id={sid_obj}" width="500" height="250" target="dialog"><span>修改</span></a></li>
+			<li><a class="edit" href="sys/inventory/edit?id={sid_obj}" width="580" height="430" target="dialog"><span>修改</span></a></li>
 			<li class="line">line</li>
-			<li><a class="delete" href="wms/customer/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
+			<li><a class="delete" href="sys/inventory/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
+			<li class="line">line</li>
+			<li><a class="add" href="sys/inventory/toUpdatePassword?id={sid_obj}" rel="userPassword_edit" width="500" height="300" target="dialog"><span>设置密码</span></a></li>
 		</ul>
 	</div>
 	
@@ -34,9 +49,7 @@
 					</td>
 	            	<td align="left">${(customer.id)!}</td>
 	            	<td align="left">${(customer.name)!}</td>
-	            	<td align="left">
-	            		<#if (customer.type)?? && customer.type==0>供应商<#else>客户</#if>
-	            	</td>
+	            	<td align="left">${(customer.type)!}</td>
 				</tr>
 			</#list>
 		</tbody>
@@ -55,4 +68,3 @@
 		<div class="pagination" targetType="navTab" totalCount="${pager.totalRow!}" numPerPage="${pager.pageSize!}" pageNumShown="10" currentPage="${pager.pageNumber!}"></div>
 	</div>
 </div>
-

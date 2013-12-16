@@ -19,8 +19,13 @@
 			</dl>
 			<dl>
 				<dt>类型：</dt>
-				<dd><input type="text" name="customer.type"  value="${(customer.type)!}"
-					class="required" remote="wms/customer/checkNameIsNotExist?id=${(customer.id)!}"></dd>
+				<dd>
+				<select name="customer.type" class="required combox">
+					<option value="">---请选择---</option>
+					<option value="0" <#if (customer.type)?? && customer.type==0>selected="selected"</#if>>供应商</option>
+					<option value="1" <#if (customer.type)?? && customer.type==1>selected="selected"</#if>>客户</option>
+				</select>
+					</dd>
 			</dl>
 		</div>
 		<div class="formBar">

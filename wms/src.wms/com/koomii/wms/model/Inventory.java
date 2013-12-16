@@ -30,7 +30,7 @@ public class Inventory extends Model<Inventory> {
 					detail.getLong("materialId"));
 			//如果没有货物的库存则新建
 			if(i == null){
-				i = new Inventory().set("storageId", "inStorage")
+				i = new Inventory().set("storageId", form.get("inStorage"))
 				.set("materialId", detail.getLong("materialId"))
 				.set("quantity", detail.getDouble("quantity"));
 				i.save();

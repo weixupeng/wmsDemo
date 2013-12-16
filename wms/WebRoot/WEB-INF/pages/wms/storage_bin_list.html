@@ -1,18 +1,18 @@
 <base href="${CONTEXT_PATH}/" />
-<form id="pagerForm" action="wms/customer" onsubmit="return navTabSearch(this)" method="post">
+<form id="pagerForm" action="wms/storage_bin" onsubmit="return navTabSearch(this)" method="post">
    	<input type="hidden" name="pager.pageNumber" value="${(pager.pageNumber)!}" /><!--【必须】value=1可以写死-->
    	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
 	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
    		也可以在searchForm上设置属性rel=”pagerForm”，js框架会自动把searchForm搜索条件复制到pagerForm中 -->
-</form> 
+</form>
 <div class="pageContent" style="padding:0px">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" target="dialog"  width="500" height="250"  href="wms/customer/add"><span>新增</span></a></li>
+			<li><a class="add" target="dialog"  width="500" height="250"  href="wms/storage_bin/add"><span>新增</span></a></li>
 			<li class="line">line</li>
-			<li><a class="edit" href="wms/customer/edit?id={sid_obj}" width="500" height="250" target="dialog"><span>修改</span></a></li>
+			<li><a class="edit" href="wms/storage_bin/edit?id={sid_obj}" width="500" height="250" target="dialog"><span>修改</span></a></li>
 			<li class="line">line</li>
-			<li><a class="delete" href="wms/customer/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
+			<li><a class="delete" href="wms/storage_bin/delete"  target="selectedTodo" rel="ids"  title="确认删除？"><span>删除</span></a></li>
 		</ul>
 	</div>
 	
@@ -20,23 +20,21 @@
 		<thead>
 			<tr>
 				<th width="80" align="left"><input type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
-				<th width="150" align="left">编码</th>
-				<th width="150" align="left">名称</th>
-				<th width="150" align="left">类型</th>
+				<th width="150" align="left">ID号</th>
+				<th width="150" align="left">仓位号</th>
+				<th width="150" align="left">所属仓库</th>
 			</tr>
 		</thead>
 		<tbody>
-			<#list pager.list as customer>
-				<tr target="sid_obj" rel="${(customer.id)!}" ondblclick="migr.baseMoudleDblick(this)"> 
+			<#list pager.list as storage_bin>
+				<tr target="sid_obj" rel="${(storage_bin.id)!}" ondblclick="migr.baseMoudleDblick(this)"> 
 					<td align="left">
-						<input name="ids" type="checkbox" value="${(customer.id)!}"/>
-						${customer_index + 1}
+						<input name="ids" type="checkbox" value="${(storage_bin.id)!}"/>
+						${storage_bin_index + 1}
 					</td>
-	            	<td align="left">${(customer.id)!}</td>
-	            	<td align="left">${(customer.name)!}</td>
-	            	<td align="left">
-	            		<#if (customer.type)?? && customer.type==0>供应商<#else>客户</#if>
-	            	</td>
+	            	<td align="left">${(storage_bin.id)!}</td>
+	            	<td align="left">${(storage_bin.binCode)!}</td>
+	            	<td align="left">${(storage_bin.storeId)!}【${(storage_bin.storeName)!}】</td>
 				</tr>
 			</#list>
 		</tbody>
