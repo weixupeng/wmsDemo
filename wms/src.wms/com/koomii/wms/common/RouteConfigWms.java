@@ -5,6 +5,7 @@ import com.jfinal.core.JFinal;
 import com.koomii.wms.controller.CustomerController;
 import com.koomii.wms.controller.EmployeController;
 import com.koomii.wms.controller.FormController;
+import com.koomii.wms.controller.InventoryBinController;
 import com.koomii.wms.controller.InventoryController;
 import com.koomii.wms.controller.MaterialController;
 import com.koomii.wms.controller.StorageBinController;
@@ -20,6 +21,7 @@ public class RouteConfigWms {
 		me.add("/wms/employe", EmployeController.class);
 		me.add("/wms/storage_bin", StorageBinController.class);
 		me.add("/wms/inventory", InventoryController.class);
+		me.add("/wms/inventory_bin", InventoryBinController.class);
 	}
 	
 	/**
