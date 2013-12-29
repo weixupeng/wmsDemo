@@ -1,5 +1,5 @@
 <base href="${CONTEXT_PATH}/" />
-<form id="pagerForm" action="wms/inventory_bin" onsubmit="return navTabSearch(this)" method="post">
+<form id="pagerForm" action="wms/form" onsubmit="return navTabSearch(this)" method="post">
    	<input type="hidden" name="pager.pageNumber" value="${(pager.pageNumber)!}" /><!--【必须】value=1可以写死-->
    	<input type="hidden" name="pager.pageSize" value="${(pager.pageSize)!}" /><!--【可选】每页显示多少条-->
 	<!--【可选】其它查询条件，业务有关，有什么查询条件就加什么参数。
@@ -7,51 +7,57 @@
 	<div class="pageHeader">
 		<div class="searchBar">
     		<table class="searchContent">
-    				<td style="width:220px;">
-    					<label>仓库：</label>
-	    				<select name="storage" class="required combox" ref="store_bin" refurl="wms/inventory_bin/storebin?storeId={value}">
-							<option value="">---请选择---</option>
-							<#list storageList as s>
-							<option value="${(s.id)!}" <#if storage?? && storage == s.id>selected="selected"</#if>>${(s.name)!}</option>
-							</#list>
-						</select>
-    				</td>
-    				<td style="width:220px;">
-    					<label>仓位：</label>
-	    				<select name="storageBin" class="required combox" id="store_bin">
-							<option value="">---请选择---</option>
-						</select>
-    				</td>
-					<td>
-    					货物：<input type="text" class="focus highlightText" size="40" name="tag" value="${(tag)!}" alt="货号/货物名称"/>
-    				</td>
-    				<td><div class="button"><div class="buttonContent"><button type="submit">查询</button></div></div></td>
+    			<tr>
+    				<td></td>
     			</tr>
     		</table>
     	</div>
 	</div>
 </form>
 <div class="pageContent" style="padding:0px">
-	<table class="table" layoutH="77">
+	<table class="table" layoutH="85">
 		<thead>
 			<tr>
 				<th width="80" align="left"><input type="checkbox" group="ids" class="checkboxCtrl"/>行号</th>
-				<th width="150" align="left">仓库</th>
-				<th width="150" align="left">仓位</th>
-				<th width="150" align="left">货物</th>
-				<th width="150" align="left">数量</th>
+				<th width="150" align="left">单据号</th>
+				<th width="100" align="left">单据类型</th>
+				<th width="150" align="left">创建时间</th>
+				<th width="100" align="left">作业人</th>
+				<th width="150" align="left">作业时间</th>
+				<th width="100" align="left">入库仓库</th>
+				<th width="100" align="left">出库仓库</th>
+				<th width="100" align="left">盘点仓库</th>
+				<th width="150" align="left">供应商/客户</th>
+				<th width="100" align="left">操作人</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list pager.list as i>
 				<tr target="sid_obj"> 
 					<td align="left">
+						<input name="ids" type="checkbox" value="${(i.id)!}"/>
 						${i_index + 1}
 					</td>
-					<td align="left">${(i.storeId)!}【${(i.storeName)!}】</td>
-	            	<td align="left">${(i.storageBinId)!}【${(i.storageBin)!}】</td>
-	            	<td align="left">${(i.materialId)!}【${(i.materialName)!}】</td>
-	            	<td align="left">${(i.quantity)!}</td>
+					<td align="left">${(i.id)!}</td>
+					<td align="left">
+						<#if i.type==0>
+							入库单
+						<#elseif i.type==1>
+							出库单
+						<#elseif i.type==2>
+							移库单
+						<#elseif i.type==3>
+							盘点单
+						</#if>
+					</td>
+					<td align="left">${(i.createDate)!}</td>
+					<td align="left">${(i.worker)!}<#if i.worker??>【${(i.workerName)!}】</#if></td>
+					<td align="left">${(i.optime)!}</td>
+					<td align="left">${(i.inStorage)!}<#if i.inStorage??>【${(i.inStoreName)!}】</#if></td>
+					<td align="left">${(i.outStorage)!}<#if i.outStorage??>【${(i.outStoreName)!}】</#if></td>
+					<td align="left">${(i.miStorage)!}<#if i.miStorage??>【${(i.miStoreName)!}】</#if></td>
+	            	<td align="left">${(i.customer)!}<#if i.customer??>【${(i.customerName)!}】</#if></td>
+	            	<td align="left">${(i.operator)!}</td>
 				</tr>
 			</#list>
 		</tbody>

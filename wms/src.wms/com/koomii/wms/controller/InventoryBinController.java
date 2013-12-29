@@ -32,14 +32,36 @@ public class InventoryBinController extends BaseController{
 		Page<Inventory> pager = Inventory.dao.paginate(
 				getParaToInt("pager.pageNumber", 1),
 				getParaToInt("pager.pageSize", 20),
-				"select i.*,m.name as materialName,s.binCode as storageBin ", 
-				" from "+TABLE_InventoryBin+" i,"+TABLE_Material+" m,"+TABLE_StorageBin+" s where s.id=i.storageBinId and m.id=i.materialId " + whee.toString(),
+				"select i.*,m.name as materialName,sb.binCode as storageBin,s.id as storeId,s.name as storeName ", 
+				" from "+TABLE_InventoryBin+" i,"+TABLE_Material+" m,"+TABLE_Storage+" s,"+TABLE_StorageBin+" sb where s.id=sb.storeId and sb.id=i.storageBinId and m.id=i.materialId " + whee.toString(),
 				param.toArray());
 		
 		setAttr("storageBin", storageBin);
 		setAttr("tag", tag);
-		setAttr("storageBinList", StorageBin.dao.find("select * from "+TABLE_StorageBin));
+		setAttr("storageList", Storage.dao.find("select * from "+TABLE_Storage));
 		setAttr("pager",pager);
 		render("../inventory_bin.html");
+	}
+	
+	public void storebin(){
+		List<StorageBin> storageBinLlist = new ArrayList<StorageBin>();
+		String storeId = getPara("storeId");
+		if(ChristStringUtil.isNotEmpty(storeId)){
+			storageBinLlist = StorageBin.dao.find("select * from "+TABLE_StorageBin
+					+" where storeId=?"
+					, storeId);
+		}
+		List<Object[]> resultList = new ArrayList<Object[]>();
+		Object[] pselect = new Object[2];
+		pselect[0] = "";
+		pselect[1] = "--请选择--";
+		resultList.add(pselect);
+		for(StorageBin sb:storageBinLlist){
+			Object[] result = new Object[2];
+			result[0] = sb.getLong("id");
+			result[1] = sb.getStr("binCode");
+			resultList.add(result);
+		}
+		renderJson(resultList);
 	}
 }
