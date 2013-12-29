@@ -110,7 +110,8 @@
 	{@each _ as o,index}
 	<tr>
 	  <td>@{++index}</td>
-	  <td>@{o.storageBinCode}</td>
+	  <td>@{o.outStorageBinId}【@{o.outStorageBinCode}】</td>
+	  <td>@{o.inStorageBinId}【@{o.inStorageBinCode}】</td>
 	  <td>@{o.materialId}【@{o.materialName}】</td>
 	  <td>@{o.quantity}</td>
 	<td><a href="javascript:void(0);" onclick="del(this);" sid="@{o.id}">删除</a></td>
@@ -121,7 +122,8 @@
 		<thead>
 			<tr>
 				<th style="width:80px;">行号</th>
-				<th style="width:80px;">仓位</th>
+				<th style="width:80px;">转出仓位</th>
+				<th style="width:80px;">转入仓位</th>
 				<th style="width:180px;">货物</th>
 				<th style="width:100px;">数量</th>
 				<th style="width:200px;">操作</th>

@@ -33,11 +33,23 @@
 				<td  style="width:30px;">:</td>
 				<td><a  href="wms/form/oo">出库</a></td>
 			</tr>
+		<#elseif type == 2>
+			<tr>
+				<td  style="width:120px;">&gt;创建新移库单</td>
+				<td  style="width:30px;">:</td>
+				<td><a  href="wms/form/to">移库</a></td>
+			</tr>
+		<#elseif type == 3>
+			<tr>
+				<td  style="width:120px;">&gt;创建新盘点单</td>
+				<td  style="width:30px;">:</td>
+				<td><a  href="wms/form/mio">盘点</a></td>
+			</tr>
 		</#if>
 		<tr>
 			<td  style="width:120px;">&gt;查看库存</td>
 			<td  style="width:30px;">:</td>
-			<td><a  href="#">仓库库存</a></td>
+			<td><a  href="wms/inventory">仓库库存</a></td>
 		</tr>
 	</tbody>
 </table>

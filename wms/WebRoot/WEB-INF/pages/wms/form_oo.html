@@ -99,7 +99,7 @@
 	{@each _ as o,index}
 	<tr>
 	  <td>@{++index}</td>
-	  <td>@{o.storageBinCode}</td>
+	  <td>@{o.outStorageBinId}【@{o.outStorageBinCode}】</td>
 	  <td>@{o.materialId}【@{o.materialName}】</td>
 	  <td>@{o.quantity}</td>
 	<td><a href="javascript:void(0);" onclick="del(this);" sid="@{o.id}">删除</a></td>

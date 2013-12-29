@@ -77,6 +77,13 @@ public class FormController extends BaseController {
 				d.set("outStorageBinCode", jo.getString("outStorageBinCode"));
 			}
 			
+			if(type == 3){
+				d.set("miStorageBinId", jo.getLong("miStorageBinId"));
+				d.set("miStorageBinCode", jo.getString("miStorageBinCode"));
+				d.set("oldQuantity", jo.getDouble("oldQuantity"));
+				d.set("balance", jo.getDouble("balance"));
+			}
+			
 			d.set("formId", form.getLong("id"));
 			d.save();
 			detailList.add(d);
@@ -129,15 +136,48 @@ public class FormController extends BaseController {
 	}
 	
 	/**
+	 * 盘点单 Mi order
+	 */
+	public void mio() {
+		setAttr("storageList", Storage.dao.find("select * from "+TABLE_Storage));
+		setAttr("employeList", Employe.dao.find("select * from "+TABLE_Employe));
+		render("../form_mio.html");
+	}
+	
+	@ Before(Tx.class)
+	public void miosave(){
+		Form form = getModel(Form.class,"form");
+		List<FormDetail> detailList = new ArrayList<FormDetail>();
+		saveFormAndDetails(form,detailList);
+		//变更库存
+		Inventory.dao.mi(form, detailList);
+		setAttr("type",form.getInt("type"));
+		setAttr("message","盘点操作成功！单据号："+form.getLong("id"));
+		render("../form_result.html");
+	}
+	
+	/**
 	 * 查询商品
 	 */
 	public void searchMaterial(){
 		List<Material> mlist = new ArrayList<Material>();
 		String tag = getPara("tag");
-		if(ChristStringUtil.isNotEmpty(tag)){
-			mlist = Material.dao.find("select * from "+TABLE_Material
-					+" where tag like ?"
-					, "%"+tag+"%");
+		Long binCode = getParaToLong("binCode", null);
+		if(binCode == null){
+			if(ChristStringUtil.isNotEmpty(tag)){
+				mlist = Material.dao.find("select * from "+TABLE_Material
+						+" where tag like ?"
+						, "%"+tag+"%");
+			}
+		}else{
+			String sql = "select m.*,ib.quantity from "+TABLE_Material+" m,"+TABLE_InventoryBin+" ib"
+					+" where m.id=ib.materialId and ib.storageBinId=? ";
+			if(ChristStringUtil.isNotEmpty(tag)){
+				sql += " and tag like ? ";
+				mlist = Material.dao.find(sql, binCode,"%"+tag+"%");
+			}else{
+				mlist = Material.dao.find(sql, binCode);
+			}
 		}
 		renderJson(mlist);
 	}

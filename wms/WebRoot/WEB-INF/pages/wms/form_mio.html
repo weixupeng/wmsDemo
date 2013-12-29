@@ -1,18 +1,18 @@
 <#include "../common/_layout.html"/>
 <@layout>
 <div class="pageFormContent" layouth="300">
-	<h2 class="contentTitle">入库单</h2>
-	<form id="ioForm" method="post" action="wms/form/iosave" class="pageForm">
+	<h2 class="contentTitle">盘点单</h2>
+	<form id="ioForm" method="post" action="wms/form/miosave" class="pageForm">
 	<input type="hidden" id="id" name="id" value="">
-	<input type="hidden" id="type" name="form.type" value="0">
+	<input type="hidden" id="type" name="form.type" value="3">
 	<input type="hidden" id="status" name="form.status" value="0">
 	<input type="hidden" id="detailList" name="detailList">
 	<fieldset>
 		<legend>单据信息</legend>
 		<dl>
-			<dt>入库仓库：</dt>
+			<dt>盘点仓库：</dt>
 			<dd>
-				<select name="form.inStorage" class="required combox">
+				<select name="form.miStorage" class="required combox">
 					<option value="">---请选择---</option>
 					<#list storageList as s>
 					<option value="${(s.id)!}">${(s.name)!}</option>
@@ -21,18 +21,7 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt>供应商：</dt>
-			<dd>
-				<select name="form.customer" class="required combox">
-					<option value="">---请选择---</option>
-					<#list customerList as s>
-					<option value="${(s.id)!}">${(s.name)!}</option>
-					</#list>
-				</select>
-			</dd>
-		</dl>
-		<dl>
-			<dt>入库时间：</dt>
+			<dt>盘点时间：</dt>
 			<dd>
 				<input type="text" name="form.optime" value="" class="required textInput date" format="yyyy-MM-dd HH:mm:ss" readonly="true">
 				<a class="inputDateButton" href="javascript:void(0);">选择</a>
@@ -84,11 +73,11 @@
 <script id="materialTpl" type="text/template">
 	<option value="">---请选择---</option>
 	{@each _ as o,index}
-	<option value="@{o.id}###@{o.name}">@{o.id}【@{o.name}】</option>
+	<option value="@{o.id}###@{o.name}###@{o.quantity}">@{o.id}【@{o.name}】库存：@{o.quantity}</option>
 	{@/each}
 </script>
 		<dl>
-			<dt style="width:40px;">数量：</dt>
+			<dt style="width:60px;">盘点数量：</dt>
 			<dd>
 				<input type="text" id="quantity" name="formDetail.quantity" class="required textInput">
 				<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="add();">添加</button></div></div>
@@ -99,9 +88,11 @@
 	{@each _ as o,index}
 	<tr>
 	  <td>@{++index}</td>
-	  <td>@{o.inStorageBinId}【@{o.inStorageBinCode}】</td>
+	  <td>@{o.miStorageBinId}【@{o.miStorageBinCode}】</td>
 	  <td>@{o.materialId}【@{o.materialName}】</td>
+	  <td>@{o.oldQuantity}</td>
 	  <td>@{o.quantity}</td>
+	  <td>{@if o.balance>0}+{@/if}@{o.balance}</td>
 	<td><a href="javascript:void(0);" onclick="del(this);" sid="@{o.id}">删除</a></td>
 	</tr>
 	{@/each}
@@ -112,7 +103,9 @@
 				<th style="width:80px;">行号</th>
 				<th style="width:80px;">仓位</th>
 				<th style="width:180px;">货物</th>
-				<th style="width:100px;">数量</th>
+				<th style="width:100px;">库存数量</th>
+				<th style="width:100px;">盘点数量</th>
+				<th style="width:100px;">盘赢+/盘亏-</th>
 				<th style="width:200px;">操作</th>
 			</tr>
 		</thead>
@@ -125,8 +118,8 @@
 		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="0">草稿</button></div></div>
 	</li>
 	<li>
-		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="1">入库</button></div></div>
+		<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="saveForm(this);" status="1">过账</button></div></div>
 	</li>
 </ul>
-<script src="static/js/wms/form.js" type="text/javascript"></script>
+<script src="static/js/wms/form_mio.js" type="text/javascript"></script>
 </@layout>
