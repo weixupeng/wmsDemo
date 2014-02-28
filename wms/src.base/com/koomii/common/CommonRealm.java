@@ -40,32 +40,18 @@ public class CommonRealm extends AuthorizingRealm {
     /**
      * The default query used to retrieve account data for the user.
      */
-    protected static final String DEFAULT_AUTHENTICATION_QUERY = "select password from users where username = ?";
+    protected static final String DEFAULT_AUTHENTICATION_QUERY = "SELECT pwd FROM sys_userinfo WHERE username=?";
     
-    /**
-     * The default query used to retrieve account data for the user when {@link #saltStyle} is COLUMN.
-     */
-    protected static final String DEFAULT_SALTED_AUTHENTICATION_QUERY = "select password, password_salt from users where username = ?";
-
     /**
      * The default query used to retrieve the roles that apply to a user.
      */
-    protected static final String DEFAULT_USER_ROLES_QUERY = "select role_name from user_roles where username = ?";
+    protected static final String DEFAULT_USER_ROLES_QUERY = "SELECT roleId FROM sys_roleuser WHERE username=?";
 
     /**
      * The default query used to retrieve permissions that apply to a particular role.
+     * select permission from roles_permissions where role_name = ?
      */
-    protected static final String DEFAULT_PERMISSIONS_QUERY = "select permission from roles_permissions where role_name = ?";
-
-    /**
-     * Password hash salt configuration. <ul>
-     *   <li>NO_SALT - password hashes are not salted.</li>
-     *   <li>CRYPT - password hashes are stored in unix crypt format.</li>
-     *   <li>COLUMN - salt is in a separate column in the database.</li> 
-     *   <li>EXTERNAL - salt is not stored in the database. {@link #getSaltForUser(String)} will be called
-     *       to get the salt</li></ul>
-     */
-    public enum SaltStyle {NO_SALT, CRYPT, COLUMN, EXTERNAL};
+    protected static final String DEFAULT_PERMISSIONS_QUERY = "SELECT tname FROM sys_rolemoudle WHERE roleId=?";
 
     /*--------------------------------------------
     |    I N S T A N C E   V A R I A B L E S    |
@@ -147,7 +133,9 @@ public class CommonRealm extends AuthorizingRealm {
     /*--------------------------------------------
     |               M E T H O D S               |
     ============================================*/
-
+    /**
+     * 此方法是登录时调用的，返回带有密码的用户信息即可
+     */
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         String username = upToken.getUsername();
