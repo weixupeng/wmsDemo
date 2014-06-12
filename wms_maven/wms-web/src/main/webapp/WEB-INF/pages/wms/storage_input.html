@@ -1,0 +1,28 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="wms/storage/<#if (storage.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+		<input type="hidden" id="id" name="id"  value="${(storage.id)!}">
+		<div class="pageFormContent" layoutH="56">
+			<h2 class="contentTitle"><#if (storage.id)??>编辑仓库<#else>创建仓库</#if></h2>
+			<dl>
+				<dt>仓库号：</dt>
+				<dd>
+					<input type="text" name="storage.id"   value="${(storage.id)!}" oldValue="${(storage.id)!}"
+						class="required" remote="wms/storage/checkIsNotExist?id=${(storage.id)!}"
+						maxlength="30" <#if (storage.id)??>readonly="readonly"</#if>/></dd>
+			</dl>
+			
+			<dl>
+				<dt>仓库名称：</dt>
+				<dd><input type="text" name="storage.name"  value="${(storage.name)!}"
+					class="required" remote="wms/storage/checkNameIsNotExist?id=${(storage.id)!}"></dd>
+			</dl>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

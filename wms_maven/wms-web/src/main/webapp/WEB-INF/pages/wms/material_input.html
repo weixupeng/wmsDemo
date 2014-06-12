@@ -1,0 +1,33 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="wms/material/<#if (material.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+		<input type="hidden" id="id" name="id"  value="${(material.id)!}">
+		<div class="pageFormContent" layoutH="56">
+			<h2 class="contentTitle"><#if (material.id)??>编辑货物资料<#else>创建新货物资料</#if></h2>
+			<dl> 
+				<dt>货物号：</dt>
+				<dd>
+					<input type="text" name="material.id"   value="${(material.id)!}" oldValue="${(material.id)!}"
+						class="required" remote="wms/material/checkIsNotExist?id=${(material.id)!}"
+						maxlength="30" <#if (material.id)??>readonly="readonly"</#if>/></dd>
+			</dl>
+			
+			<dl>
+				<dt>货物名称：</dt>
+				<dd><input type="text" name="material.name"  value="${(material.name)!}"
+					class="required" remote="wms/material/checkNameIsNotExist?id=${(material.id)!}"></dd>
+			</dl>
+			<dl>
+				<dt>货物价格：</dt>
+				<dd><input type="text" name="material.price"  value="${(material.price)!}"
+					class="required" remote="wms/material/checkNameIsNotExist?id=${(material.id)!}"></dd>
+			</dl>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

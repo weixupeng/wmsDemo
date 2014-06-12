@@ -1,0 +1,29 @@
+@charset "utf-8";
+.line_border{
+	border-top:0px;
+	border-left:0px;
+	border-right:0px;
+	background:#ffffff;
+}
+/*高亮显示的颜色*/
+.highlight {
+	background-color: #96BEFF;
+}
+
+/* treegrid样式 */
+.treegrid{background:url(../themes/default/images/tree/tree.png) no-repeat;}
+
+.tg_collapsable { background-position:0 -300px;cursor: pointer;}
+.tg_first_collapsable { background-position:0 -250px;}
+.tg_last_collapsable { background-position:0 -350px;}
+.tg_end_collapsable { background-position:0 -200px;}
+
+.tg_expandable { background-position:0 -100px;cursor: pointer;}
+.tg_first_expandable { background-position:0 -50px;}
+.tg_last_expandable { background-position:0 -150px;}
+.tg_end_expandable { background-position:0 0;}
+
+.tg_line { background-position:0 -400px;}
+.tg_node { background-position:0 -450px;}
+.tg_last_node { background-position:0 -500px;}
+

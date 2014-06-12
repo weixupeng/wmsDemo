@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta  charset="UTF-8">
+<base href="${CONTEXT_PATH}/" />
+<style>
+	table {margin:0px; padding:0px;}
+	table.tbfix {width:100%; table-layout:fixed; background:#bbb}
+	table.tbcom {width:100%; background:#bbb}
+	td {padding:3px; background:#fff}
+	td.title {background:#eee}
+	td.left {width:200px}
+	input.button {width:100px}
+	textarea#result {width:100%; height:300px; background:#ffffe0}
+</style>
+<script  type="text/javascript"  src="static/js/jquery-1.4.4.js"></script>
+<script  type="text/javascript"  src="static/js/jquery.cookie.js"></script>
+<script  type="text/javascript"  src="static/api/app.util.js"></script>
+<script  type="text/javascript"  src="static/api/apiTest.js"></script>
+</head>
+<body>
+	<h2>RuyiziService Debug Server - v1.0</h2>
+	<hr>
+		<a  href="console/home">Home</a>
+		| <a  href="console/apilist">Api Test</a>
+		| <a  href="console/apistat">Api Stat</a>
+	<hr>
+	<table  class="tbfix"  cellpadding="1"  cellspacing="1">
+		<tbody>
+			<tr><td  class="title"  colspan="3">(一)	用户相关API</td></tr>
+			<tr><td>1.用户登录（Key的获取）</td><td>/api/u/login</td><td><a  href="./console/u_login.html">测试</a></td></tr>
+			<tr><td>2.用户退出</td><td>/api/u/logout</td><td><a  href="./console/u_logout.html">测试</a></td></tr>
+			<tr><td>3.用户注册</td><td>/api/u/reg</td><td><a  href="./console/u_reg.html">测试</a></td></tr>
+			<tr><td>4.用户信息查询</td><td>/api/u/my</td><td><a  href="./console/u_my.html">测试</a></td></tr>
+			<tr><td>5.用户信息维护</td><td>/api/u/edit</td><td><a  href="./console/u_edit.html">测试</a></td></tr>
+			<tr><td>6.用户修改密码</td><td>/api/u/modifyPwd</td><td><a  href="./console/u_modifypwd.html">测试</a></td></tr>
+			<tr><td>7.用户头像上传</td><td>/api/u/upimg</td><td><a  href="./console/u_upimg.html">测试</a></td></tr>
+			
+			<tr><td  class="title"  colspan="3">(二)	盘口相关API</td></tr>
+			<tr><td>1.最热列表</td><td>/api/pk/hot</td><td><a  href="./console/pk_hot.html">测试</a></td></tr>
+			<tr><td>2.最新列表</td><td>/api/pk/lastest</td><td><a  href="./console/pk_lastest.html">测试</a></td></tr>
+			<tr><td>3.发布盘口</td><td>/api/pk/add</td><td><a  href="./console/pk_add.html">测试</a></td></tr>
+			<tr><td>4.查看详情</td><td>/api/pk/detail</td><td><a  href="./console/pk_detail.html">测试</a></td></tr>
+			<tr><td>5.参与PK</td><td>/api/pk/join</td><td><a  href="./console/pk_join.html">测试</a></td></tr>
+			<tr><td>6.我的盘口</td><td>/api/pk/my</td><td><a  href="./console/pk_my.html">测试</a></td></tr>
+			<tr><td>7.我参与的盘口</td><td>/api/pk/myjoin</td><td><a  href="./console/pk_myjoin.html">测试</a></td></tr>
+			<tr><td>8.盘口决胜</td><td>/api/pk/judge</td><td><a  href="./console/pk_judge.html">测试</a></td></tr>
+		</tbody></table>
+		<hr>
+		<span class="doTest" style="height:0px;">&nbsp;</span>
+</body></html>

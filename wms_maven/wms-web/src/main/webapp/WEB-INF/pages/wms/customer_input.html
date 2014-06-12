@@ -1,0 +1,38 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="wms/customer/<#if (customer.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+		<input type="hidden" id="id" name="id"  value="${(customer.id)!}">
+		<div class="pageFormContent" layoutH="56">
+			<h2 class="contentTitle"><#if (customer.id)??>编辑资料<#else>创建资料</#if></h2>
+			<dl> 
+				<dt>编码：</dt>
+				<dd>
+					<input type="text" name="customer.id"   value="${(customer.id)!}" oldValue="${(customer.id)!}"
+						class="required" remote="wms/customer/checkIsNotExist?id=${(customer.id)!}"
+						maxlength="30" <#if (customer.id)??>readonly="readonly"</#if>/></dd>
+			</dl>
+			
+			<dl>
+				<dt>名称：</dt>
+				<dd><input type="text" name="customer.name"  value="${(customer.name)!}"
+					class="required" remote="wms/customer/checkNameIsNotExist?id=${(customer.id)!}"></dd>
+			</dl>
+			<dl>
+				<dt>类型：</dt>
+				<dd>
+				<select name="customer.type" class="required combox">
+					<option value="">---请选择---</option>
+					<option value="0" <#if (customer.type)?? && customer.type==0>selected="selected"</#if>>供应商</option>
+					<option value="1" <#if (customer.type)?? && customer.type==1>selected="selected"</#if>>客户</option>
+				</select>
+					</dd>
+			</dl>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,39 @@
+<base href="${CONTEXT_PATH}/" />
+<div class="pageContent">
+	<form method="post" action="wms/storage_bin/<#if (storage_bin.id)??>update<#else>save</#if>" class="pageForm validate" onsubmit="return validateCallback(this, dialogResetDone)">
+		<input type="hidden" id="id" name="id"  value="${(storage_bin.id)!}">
+		<div class="pageFormContent" layoutH="56">
+			<h2 class="contentTitle"><#if (storage_bin.id)??>编辑仓位<#else>创建仓位</#if></h2>
+			<dl>
+				<dt>ID号：</dt>
+				<dd>
+					<input type="text" name="storage_bin.id"   value="${(storage_bin.id)!}" oldValue="${(storage_bin.id)!}"
+						class="required" remote="wms/storage_bin/checkIsNotExist?id=${(storage_bin.id)!}"
+						maxlength="30" <#if (storage_bin.id)??>readonly="readonly"</#if>/></dd>
+			</dl>
+			
+			<dl>
+				<dt>仓位号：</dt> 
+				<dd><input type="text" name="storage_bin.binCode"  value="${(storage_bin.binCode)!}"
+					class="required" remote="wms/storage_bin/checkNameIsNotExist?id=${(storage_bin.id)!}"></dd>
+			</dl>
+			<dl>
+				<dt>所属仓库：</dt> 
+				<dd>
+					<select name="storage_bin.storeId" class="required combox">
+						<option value="">---请选择---</option>
+						<#list storageList as s>
+						<option value="${(s.id)!}" <#if (storage_bin.storeId)?? && storage_bin.storeId==s.id>selected="selected"</#if>>${(s.name)!}</option>
+						</#list>
+					</select>
+				</dd>
+			</dl>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

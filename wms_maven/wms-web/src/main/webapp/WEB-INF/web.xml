@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="ruyizi_api" version="2.5">
+  <context-param>
+    <param-name>shiroConfigLocations</param-name>
+    <param-value>classpath:shiro_common.ini</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+  </listener>
+  <filter>
+    <filter-name>shiro</filter-name>
+    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>shiro</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>jfinal</filter-name>
+    <filter-class>com.jfinal.core.JFinalFilter</filter-class>
+    <init-param>
+      <param-name>configClass</param-name>
+      <param-value>com.koomii.common.JFinalWebConfig</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>jfinal</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
